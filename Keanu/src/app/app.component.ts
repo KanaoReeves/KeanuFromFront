@@ -25,8 +25,6 @@ export class MyApp {
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
-      //{ title: 'Page One', component: Page1 },
-      //{ title: 'Page Two', component: Page2 },
       { title: 'Login', component: LoginPage }
     ];
 
