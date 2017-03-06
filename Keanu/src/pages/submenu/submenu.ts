@@ -13,10 +13,13 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class SubmenuPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  public title: string;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SubmenuPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.title='';
   }
 
+  ionViewDidLoad() {
+    this.title = this.navParams.get('title');
+  }
 }

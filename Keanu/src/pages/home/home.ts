@@ -15,9 +15,19 @@ import { SubmenuPage } from '../submenu/submenu';
 export class HomePage {
 
   SubMenuPage = SubmenuPage;
-  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
+  }
+
+  launchSubMenuPage(type: string){
+
+    let data = {
+      title : type,
+    }
+
+    this.navCtrl.push(this.SubMenuPage, data);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
