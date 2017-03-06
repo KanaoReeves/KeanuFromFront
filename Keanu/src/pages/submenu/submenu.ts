@@ -14,12 +14,16 @@ import { NavController, NavParams } from 'ionic-angular';
 export class SubmenuPage {
 
   public title: string;
+  public menuItem;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.title='';
+    this.menuItem = {name: '', price: 0};
   }
 
   ionViewDidLoad() {
     this.title = this.navParams.get('title');
+    this.menuItem = this.navParams.get('menuItem');;
+    console.log(this.menuItem);
   }
 }
