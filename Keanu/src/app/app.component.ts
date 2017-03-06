@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-// Default Pages (We can delete this)
+// Default Pages (Leave alone for now)
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 
@@ -28,8 +28,8 @@ export class MyApp {
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
-      { title: 'Page One', component: Page1 },
-      { title: 'Page Two', component: Page2 },
+      //{ title: 'Page One', component: Page1 },
+      //{ title: 'Page Two', component: Page2 },
       { title: 'Login', component: LoginPage }
     ];
 
