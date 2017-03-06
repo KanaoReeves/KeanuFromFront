@@ -6,7 +6,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 // Keanu Pages
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
-
+import { SubmenuPage } from '../pages/submenu/submenu';
 
 @Component({
   templateUrl: 'app.html'
