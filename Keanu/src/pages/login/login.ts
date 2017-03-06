@@ -28,7 +28,6 @@ export class LoginPage {
 
   public login():void{
     let headers = new Headers({ 'username': this.username, 'password': this.password });
-    let options = new RequestOptions({ headers: headers });
 
     console.log({ headers: headers })
     this.http.post("https://keanubackend.herokuapp.com/login", null,{ headers: headers })
