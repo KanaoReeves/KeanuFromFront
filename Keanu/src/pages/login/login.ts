@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Http, Headers } from '@angular/http';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { HomePage } from '../home/home';
 import 'rxjs/Rx';
 /*
   Class for the Login page.
@@ -16,7 +17,16 @@ export class LoginPage {
   public username: string;
   public password: string;
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private http: Http, private storage: Storage) {
+  constructor(
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private http: Http,
+    private storage: Storage,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController
+  )
+  {
+
     this.username='';
     this.password='';
   }
@@ -26,6 +36,12 @@ export class LoginPage {
   // }
 
   public login():void{
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
+
     let headers = new Headers({ 'username': this.username, 'password': this.password });
 
     this.http.post("https://keanubackend.herokuapp.com/login", null,{ headers: headers })
@@ -39,6 +55,13 @@ export class LoginPage {
             },
             ()=>{
               console.log('posted login done')
+              loader.dismiss();
+              this.alertCtrl.create({
+                title: 'login Successful',
+                subTitle: 'login is valid, redirecting to homepage',
+                buttons: ['OK']
+              }).present();
+              this.navCtrl.setRoot(HomePage);
             }
         );
   }
