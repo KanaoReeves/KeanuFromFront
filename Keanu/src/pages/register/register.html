@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>login</ion-title>
+    <ion-title>Register User</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,22 +15,31 @@
 
 <ion-content padding>
   <ion-list>
+    <ion-item>
+      <ion-label floating>First Name</ion-label>
+      <ion-input type="text" [(ngModel)]="firstName"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label floating>Last Name</ion-label>
+      <ion-input type="text" [(ngModel)]="lastName"></ion-input>
+    </ion-item>    
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="email"></ion-input>
+    </ion-item>
 
     <ion-item>
       <ion-label floating>Username</ion-label>
       <ion-input type="text" [(ngModel)]="username"></ion-input>
     </ion-item>
- 
+     
     <ion-item>
       <ion-label floating>Password</ion-label>
       <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
-
+    </ion-item>  
   </ion-list>
   <div padding>
-    <button block ion-button (click)="login($event)" >Login</button>
-  </div>
-  <div padding>
-    <button block ion-button [navPush]="registerPage" >Register</button>
+    <button block ion-button (click)="next($event)" >Next</button>
   </div>
 </ion-content>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { RegisterPage } from '../register/register';
 /*
   Generated class for the Login page.
 
@@ -15,11 +15,12 @@ import { NavController, NavParams } from 'ionic-angular';
 export class LoginPage {
 
   public username: string;
-  public password: string;
+  public password: string;  
+  registerPage = RegisterPage  
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private http: Http) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private http: Http) {
     this.username='';
-    this.password='';
+    this.password='';    
   }
 
   // ionViewDidLoad() {
