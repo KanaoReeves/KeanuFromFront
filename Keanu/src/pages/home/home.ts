@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SubmenuPage } from '../submenu/submenu';
+import { Http } from '@angular/http';
+import { MenuCallService } from '../../services/getMenu';
+import 'rxjs/add/operator/map';
 
 /*
   Generated class for the Home page.
@@ -11,45 +14,46 @@ import { SubmenuPage } from '../submenu/submenu';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [MenuCallService]
 })
 export class HomePage {
+  public menuItems : any;
+  public SubMenuPage = SubmenuPage;
+  public dataPass = { title: '', menuItem : {name: '', price: 0}}
 
-  SubMenuPage = SubmenuPage;
-  public data = { title: '', menuItem : {name: '', price: 0}}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private menuCall: MenuCallService) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
-  } 
+  }
 
   launchSubMenuPage(type: string){
     
-    let starterExample = {
-      name : 'Cheddar Soup',
-      price : 7.99
-    } 
 
-    let saladExample = {
-      name : 'Spinach Salad',
-      price : 11.99
-    } 
-
+    
     switch (type){
+      case 'Starter' : 
       
-      case 'Starters' : 
-        this.data = {
-        title : type,
-        menuItem : starterExample
-      }; break;
+        this.menuItems = this.menuCall.getMenu(type);
+
+        ; break;
 
       case 'Salads' : 
-        this.data = {
-        title : type,
-        menuItem : saladExample
-      }; break;
+
+      this.http.get('https://keanubackend.herokuapp.com/item/category/Salads').map(res => res.json()).subscribe(
+        data => {
+          this.menuItems = data.data.items
+        },
+        err => {
+          console.log("Oops!");
+        }
+      );
+
+        ; break;
     }
 
-    this.navCtrl.push(this.SubMenuPage, this.data);
+    console.log(this.menuItems);
+    
+    //this.navCtrl.push(this.SubMenuPage, this.data);
   }
 
   ionViewDidLoad() {
