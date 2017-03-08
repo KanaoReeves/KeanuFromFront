@@ -1,13 +1,23 @@
-.submenu-Cards{
+/*.submenu-Cards{
+
+    height: 100%;
+
     ion-card {
         position: relative;
         text-align: center;
+        height: 20%;
+        width: 100%;
     } 
+
+    
+}
+*/
 
     .submenu-BtnCart{
         margin-top: 15px;
         background-color: #32cd32;
         width: 100%;
+        color: #FFFFFF;
     }
 
     .submenu-Price{
@@ -20,6 +30,10 @@
         display: inline;
         float: center; 
         color: #FFFFFF;
-        padding-left: 30px;
     }
-}
+
+    .submenu-Calories{
+        display: inline;
+        float: left;
+        color: #FFFFFF;
+    }

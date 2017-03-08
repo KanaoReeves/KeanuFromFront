@@ -12,18 +12,19 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'submenu.html'
 })
 export class SubmenuPage {
-
-  public title: string;
+  public menuItems: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-      this.title = this.navParams.get('data');
+      this.menuItems = this.navParams.get('data');
       console.log('###### From SUBMENU START ######')
-      console.log(this.title);
+      console.log(this.menuItems);
       console.log('###### From SUBMENU END ######') 
   }
 
+  
+  
 
   ionViewDidLoad() {
- 
+
   }
 }
