@@ -1,0 +1,25 @@
+.submenu-Cards{
+    ion-card {
+        position: relative;
+        text-align: center;
+    } 
+
+    .submenu-BtnCart{
+        margin-top: 15px;
+        background-color: #32cd32;
+        width: 100%;
+    }
+
+    .submenu-Price{
+        display: inline;
+        float: right;
+        color: #FFFFFF;
+    }
+
+    .submenu-Message{
+        display: inline;
+        float: center; 
+        color: #FFFFFF;
+        padding-left: 30px;
+    }
+}
