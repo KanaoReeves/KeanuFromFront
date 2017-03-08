@@ -1,0 +1,26 @@
+<!--
+  Generated template for the Submenu page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{this.menuItems[0].category}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of menuItems">
+    <img src={{item.imageURL}}/>
+    <ion-card-content>
+      <ion-card-title class="center">{{item.name}}</ion-card-title>
+      <p class="center">{{item.description}}</p>
+      <button class="submenu-BtnCart">
+        <p class="submenu-Calories"><strong>{{item.calories}}</strong></p>
+        <p class="submenu-Message"><strong>Add To Cart</strong></p>
+        <p class="submenu-Price"><strong>$ {{item.price}}</strong></p>
+      </button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
