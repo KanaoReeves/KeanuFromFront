@@ -18,45 +18,27 @@ import 'rxjs/add/operator/map';
   providers: [MenuCallService]
 })
 export class HomePage {
-  public menuItems : any;
+  public menuItems: any;
   public SubMenuPage = SubmenuPage;
-  public dataPass = { title: '', menuItem : {name: '', price: 0}}
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private menuCall: MenuCallService) {
 
   }
 
-  launchSubMenuPage(type: string){
-    
+  public launchSubMenuPage(type: string): void {
 
-    
-    switch (type){
-      case 'Starter' : 
-      
-        this.menuItems = this.menuCall.getMenu(type);
+    this.menuCall.getMenu(type).then((menuItems) => {
+      console.log('###### From HOME START ######')
+      console.log(menuItems)
+      console.log('###### From HOME END ######')  
+    })
 
-        ; break;
 
-      case 'Salads' : 
 
-      this.http.get('https://keanubackend.herokuapp.com/item/category/Salads').map(res => res.json()).subscribe(
-        data => {
-          this.menuItems = data.data.items
-        },
-        err => {
-          console.log("Oops!");
-        }
-      );
-
-        ; break;
-    }
-
-    console.log(this.menuItems);
-    
-    //this.navCtrl.push(this.SubMenuPage, this.data);
+    this.navCtrl.push(this.SubMenuPage, {data: 'Hello World'});
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+
   }
 }
