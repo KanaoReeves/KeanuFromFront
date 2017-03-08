@@ -25,9 +25,10 @@ export class MyApp {
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
+      // If no token exists, show login
       { title: 'Login', component: LoginPage }
+      // If Token exists, show logout
     ];
-
   }
 
   initializeApp() {
