@@ -48,7 +48,7 @@ export class PaymentInfoPage {
       let link = 'https://keanubackend.herokuapp.com/login/register'
       let data = JSON.stringify({'username': this.username, 'password': this.password, 'displayName': this.DisplayName,
                                  'email': this.email, 'adminRights': this.adminRights, 'paymentInfo': this.paymentInfo,
-                                 'address': this.address})
+                                 'address': this.address});
       this.http.post(link,data,null)
       .subscribe(
           data=>{
@@ -56,6 +56,7 @@ export class PaymentInfoPage {
           }, 
           err => {
               console.log("ERROR!: ", err);
+              console.log(data);
             },
             ()=>{
               console.log('posted registration done')
