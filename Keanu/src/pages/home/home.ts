@@ -4,6 +4,7 @@ import { SubmenuPage } from '../submenu/submenu';
 import { Http } from '@angular/http';
 import { MenuCallService } from '../../services/getMenu';
 import 'rxjs/add/operator/map';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -14,9 +15,12 @@ export class HomePage {
   public menuItems;
   public SubMenuPage = SubmenuPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private menuCall: MenuCallService) {
-
-  }
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public http: Http, 
+    private menuCall: MenuCallService, 
+    private storage: Storage) {}
 
   public launchSubMenuPage(type: string): void {
 
@@ -30,6 +34,9 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-
+    console.log('ionViewDidLoad HomePage');
+    this.storage.get('token').then((value: string)=>{
+      console.log(value)
+    })
   }
 }
