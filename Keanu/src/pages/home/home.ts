@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 /*
   Generated class for the Home page.
 
@@ -13,10 +13,13 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+    this.storage.get('token').then((value: string)=>{
+      console.log(value)
+    })
   }
 
 }
