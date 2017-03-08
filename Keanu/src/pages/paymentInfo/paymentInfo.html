@@ -20,19 +20,19 @@
       <h2>Address Information</h2>
     <ion-item>
       <ion-label floating>Street Number</ion-label>
-      <ion-input type="text" [(ngModel)]="streetnumber"></ion-input>
+      <ion-input type="text" [(ngModel)]="address.number"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Street Name</ion-label>
-      <ion-input type="text" [(ngModel)]="streetName"></ion-input>
+      <ion-input type="text" [(ngModel)]="address.name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Street Type</ion-label>
-      <ion-input type="text" [(ngModel)]="streetType"></ion-input>
+      <ion-input type="text" [(ngModel)]="address.streetType"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Postal Code</ion-label>
-      <ion-input type="text" [(ngModel)]="postalCode"></ion-input>
+      <ion-input type="text" [(ngModel)]="address.postalCode"></ion-input>
     </ion-item>
     </div> 
     <!--Payment Information-->
@@ -40,24 +40,24 @@
       <h2>Credit Card Information</h2>
     <ion-item>
       <ion-label floating>Name On The Card</ion-label>
-      <ion-input type="text" [(ngModel)]="cardName"></ion-input>
+      <ion-input type="text" [(ngModel)]="paymentInfo.name"></ion-input>
     </ion-item>
  
     <ion-item>
       <ion-label floating>Credit Card Type</ion-label>
-      <ion-input type="text" [(ngModel)]="cardType"></ion-input>
+      <ion-input type="text" [(ngModel)]="paymentInfo.cardType"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Credit Card Number</ion-label>
-      <ion-input type="text" [(ngModel)]="cardNumber"></ion-input>
+      <ion-input type="text" [(ngModel)]="paymentInfo.num"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Credit Card Expiry Date</ion-label>
-      <ion-input type="text" [(ngModel)]="cardExpiry"></ion-input>
+      <ion-input type="text" [(ngModel)]="paymentInfo.expiry"></ion-input>
     </ion-item>
     </div> 
   </ion-list>
   <div padding>
-    <button block ion-button>Next</button>
+    <button block ion-button (click)="Register($event)" >Register!</button>
   </div>
 </ion-content>

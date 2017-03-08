@@ -15,38 +15,49 @@ import { RegisterPage } from '../register/register';
 })
 export class PaymentInfoPage {
   //Info input on this page
-  public streetNumber: string;
-  public streetName: string;
-  public streetType: string;
-  public postalCode: string;
-  public cardName: string;
-  public cardType: string;
-  public cardNumber: string;
-  public cardExpiry: string;
-
- //Info pushed from previous RegisterPage
-  public firstName: string;
-  public lastName: string;
+  public address: any;
+  public paymentInfo: any;
+  public adminRights: false;
+ //Info pushed from previous RegisterPage  
   public username: string;
   public password: string;
   public email: string;
- 
+  public DisplayName: any;
 
   constructor(private navCtrl: NavController, private navParams: NavParams, private http: Http) {
     //Gets info from register page
-    this.firstName=navParams.get('firstNameParam')
-    this.lastName=navParams.get('lastNameParam')
+    this.DisplayName=navParams.get('DisplayNameParam')    
     this.email=navParams.get('emailparam');
     this.username=navParams.get('usernameParam');
     this.password=navParams.get('passwordParam');
+    console.log(this.DisplayName=navParams.get('DisplayNameParam'))
     //Info from this page
-    this.streetNumber='';
-    this.streetName='';
-    this.streetType='';
-    this.postalCode='';
-    this.cardName='';
-    this.cardType='';
-    this.cardNumber='';
-    this.cardExpiry='';        
+    this.address={
+      number: '',
+      name: '',
+      streetType: '',
+      postalCode: '',
+    }
+    this.paymentInfo={
+      name:'',
+      cardType: '',
+      num: '',
+      expiry: ''
+    }   
+    this.adminRights= false;
+  }  
+    public Register():void{
+      let link = 'https://keanubackend.herokuapp.com/login/register'
+      let data = JSON.stringify({'username': this.username, 'password': this.password, 'displayName': this.DisplayName,
+                                 'email': this.email, 'adminRights': this.adminRights, 'paymentInfo': this.paymentInfo,
+                                 'address': this.address})
+      this.http.post(link,data,null)
+      .subscribe(data=>{
+        
+      }, error=>{
+        console.log(data);
+      });
+      console.log(data)
+    }
   }
-}
+

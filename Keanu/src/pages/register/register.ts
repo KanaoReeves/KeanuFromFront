@@ -13,25 +13,24 @@ import { PaymentInfoPage } from '../paymentInfo/paymentInfo';
   selector: 'page-register',
   templateUrl: 'register.html'
 })
-export class RegisterPage {
-  public firstName: string;
-  public lastName: string;
+export class RegisterPage {  
   public username: string;
   public password: string;
   public email: string;
+  public DisplayName: any;
   //paymentInfo = PaymentInfoPage
-
   constructor(private navCtrl: NavController, private navParams: NavParams, private http: Http) {   
-    this.firstName='';
-    this.lastName='';
+    this.DisplayName={
+      firstName: '',
+      lastName: ''
+    }
     this.username='';
     this.password='';
-    this.email='';    
+    this.email='';
     }
     public next():void{
     this.navCtrl.push(PaymentInfoPage, {
-      firstNameParam: this.firstName,
-      lastNameParam: this.lastName,
+      DisplayNameParam: this.DisplayName,
       emailparam: this.email,
       usernameParam: this.username,
       passwordParam: this.password
