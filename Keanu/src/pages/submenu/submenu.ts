@@ -20,10 +20,7 @@ export class SubmenuPage {
       console.log(this.menuItems);
       console.log('###### From SUBMENU END ######') 
   }
-
   
-  
-
   ionViewDidLoad() {
 
   }

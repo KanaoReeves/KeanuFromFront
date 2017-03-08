@@ -14,12 +14,12 @@
   <ion-card *ngFor="let item of menuItems">
     <img src={{item.imageURL}}/>
     <ion-card-content>
-      <ion-card-title [innerText]="item.name"></ion-card-title>
-      <p [innerText]="item.description"></p>
+      <ion-card-title class="center">{{item.name}}</ion-card-title>
+      <p class="center">{{item.description}}</p>
       <button class="submenu-BtnCart">
-        <p class="submenu-Calories">{{item.calories}}</p>
-        <p class="submenu-Message">Add To Cart</p>
-        <p class="submenu-Price">{{item.price}}</p>
+        <p class="submenu-Calories"><strong>{{item.calories}}</strong></p>
+        <p class="submenu-Message"><strong>Add To Cart</strong></p>
+        <p class="submenu-Price"><strong>$ {{item.price}}</strong></p>
       </button>
     </ion-card-content>
   </ion-card>
