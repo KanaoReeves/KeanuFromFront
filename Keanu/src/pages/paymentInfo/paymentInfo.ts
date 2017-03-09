@@ -39,7 +39,7 @@ export class PaymentInfoPage {
     }
   }
   public Register(): void {
-    let link = 'http://127.0.0.1:5000/login/register'
+    let link = 'https://keanubackend.herokuapp.com/login/register'
     let header = new Headers({ 'Content-Type': 'application/json' })
     let data =
       {
