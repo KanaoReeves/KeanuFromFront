@@ -6,7 +6,6 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 // Keanu Pages
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
-import { RegisterPage } from '../pages/register/register';
 
 
 @Component({
@@ -26,9 +25,7 @@ export class MyApp {
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
-      //{ title: 'Page One', component: Page1 },
-      //{ title: 'Page Two', component: Page2 },
-      { title: 'Login/Register', component: LoginPage }
+      { title: 'Login', component: LoginPage }
       
     ];
 
