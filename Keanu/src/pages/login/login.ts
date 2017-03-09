@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { Http, Headers } from '@angular/http';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { RegisterPage } from '../register/register';
 import 'rxjs/Rx';
 /*
   Class for the Login page.
@@ -15,7 +16,8 @@ import 'rxjs/Rx';
 export class LoginPage {
 
   public username: string;
-  public password: string;
+  public password: string;  
+  registerPage = RegisterPage  
 
   constructor(
     private navCtrl: NavController,
@@ -28,7 +30,7 @@ export class LoginPage {
   {
 
     this.username='';
-    this.password='';
+    this.password='';    
   }
 
   // ionViewDidLoad() {

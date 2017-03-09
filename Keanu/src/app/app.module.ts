@@ -4,6 +4,9 @@ import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
+import { RegisterPage } from '../pages/register/register';
+import { PaymentInfoPage } from '../pages/paymentInfo/paymentInfo';
+
 import { SubmenuPage } from '../pages/submenu/submenu';
 
 @NgModule({
@@ -11,7 +14,10 @@ import { SubmenuPage } from '../pages/submenu/submenu';
     MyApp,
     LoginPage,
     HomePage,
+    RegisterPage,
+    PaymentInfoPage,
     SubmenuPage
+
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -19,8 +25,10 @@ import { SubmenuPage } from '../pages/submenu/submenu';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    RegisterPage,
     LoginPage,
     HomePage,
+    PaymentInfoPage,
     SubmenuPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
