@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { Http, Headers } from '@angular/http';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
+import 'rxjs/Rx';
 /*
-  Generated class for the Login page.
+  Class for the Login page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
 */
 @Component({
   selector: 'page-login',
@@ -18,7 +19,16 @@ export class LoginPage {
   public password: string;  
   registerPage = RegisterPage  
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private http: Http) {
+  constructor(
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private http: Http,
+    private storage: Storage,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController
+  )
+  {
+
     this.username='';
     this.password='';    
   }
@@ -28,8 +38,34 @@ export class LoginPage {
   // }
 
   public login():void{
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
+
     let headers = new Headers({ 'username': this.username, 'password': this.password });
-    // alert(this.username+' '+this.password)
+
+    this.http.post("https://keanubackend.herokuapp.com/login", null,{ headers: headers })
+        .subscribe(
+            data => {
+              console.log(data.json()['data']['token']);
+              this.storage.set('token',data.json()['data']['token'])
+            },
+            err => {
+              console.log("ERROR!: ", err);
+            },
+            ()=>{
+              console.log('posted login done')
+              loader.dismiss();
+              this.alertCtrl.create({
+                title: 'login Successful',
+                subTitle: 'login is valid, redirecting to homepage',
+                buttons: ['OK']
+              }).present();
+              this.navCtrl.setRoot(HomePage);
+            }
+        );
   }
 
 }
