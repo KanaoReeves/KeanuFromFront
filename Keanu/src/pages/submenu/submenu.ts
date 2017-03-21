@@ -44,12 +44,9 @@ export class SubmenuPage {
    */
   public addItem($event, item: Item) : void{
     // @keven: note the Object now includes quantity
-    this._cart.push({'id': item._id, 'quantity': 1});
- 
-    this.storage.set('CartItem', JSON.stringify(this._cart));
-    this.storage.get('CartItem').then((value)=>{
-    //console.log(value);
-    })
+    this._cart.push({'id': item._id, 'quantity': 1}); 
+    this.storage.set('CartItem', this._cart);
+    console.log(this.storage.get('CartItem'));
   }
   
 }

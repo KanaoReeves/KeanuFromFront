@@ -24,15 +24,14 @@ export class CartPage {
     private cartCall: CartCallService) {}
 
   ionViewDidLoad() {
-    //var test = JSON.parse(storage.get('CartItem'));
-    //let obtainedItems_array = JSON.parse(this.storage.get('CartItem'));  
-    //console.log(JSON.parse(obtainedItems_array));
-    console.log(this.storage.get('cartItem'));
-    this.cartCall.getCartItems(this.storage.get('cartItem')).then((cartItems) => {
-    this.storage.get('CartItem').then((value)=>{
-    console.log('CartItem');
-    })
-  })
+    this.cartCall.getCartItems();
+    console.log(this.cartItems);
+    //console.log(this.storage.get('cartItem'));
+    //this.cartCall.getCartItems(this.storage.get('cartItem')).then((cartItems) => {
+    //this.storage.get('CartItem').then((value)=>{
+    //console.log('CartItem');
+    //})
+  }
 }
-}
+
   

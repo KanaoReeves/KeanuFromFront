@@ -25,9 +25,14 @@ export class CartCallService {
      * 
      * @memberOf CartCallService
      */
-    public getCartItems(_id) {
+    public getCartItems() {
+        let _id;
+        this.storage.get('CartItem').then((value)=>{
+            let cart = (value)        
+        for (var i = 0, len = cart.length; i < len; i++){
+            _id = cart[i];
         return new Promise<Object>((resolve, reject) => {
-            let menu = this.http.get(`https://keanubackend.herokuapp.com/item/_id/${_id}`).map(res => res.json()).subscribe(
+            let menu = this.http.get(`https://keanubackend.herokuapp.com/item/id/${_id}`).map(res => res.json()).subscribe(
                 data => {
                     this.cartItems = data.data.items
                 },
@@ -40,5 +45,7 @@ export class CartCallService {
                 }
             );
         })
+    }
+})
     }
 }
