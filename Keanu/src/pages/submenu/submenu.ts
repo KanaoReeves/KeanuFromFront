@@ -32,13 +32,20 @@ export class SubmenuPage {
       }
   }
   
-  ionViewDidLoad() {
+  ionViewDidLoad() {}
 
-  }
+  /**
+   * Add item to cart
+   * 
+   * @param {any} $event 
+   * @param {Item} item 
+   * 
+   * @memberOf SubmenuPage
+   */
   public addItem($event, item: Item) : void{
-    this._cart.push(item._id);
-    console.log(this._cart);     
-    //console.log(this._cart);    
+    // @keven: note the Object now includes quantity
+    this._cart.push({'id': item._id, 'quantity': 1});
+ 
     this.storage.set('CartItem', JSON.stringify(this._cart));
     this.storage.get('CartItem').then((value)=>{
     //console.log(value);
