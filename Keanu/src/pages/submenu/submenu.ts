@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { CartCallService } from '../../services/cartItems';
+import { Item } from '../../../models'
 /*
   Generated class for the Submenu page.
 
@@ -13,15 +15,33 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class SubmenuPage {
   public menuItems: Object;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public CartItem: any;
+  private cartService: CartCallService;
+  public itemsData: any;
+  _cart = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
+    
       this.menuItems = this.navParams.get('data');
       console.log('###### From SUBMENU START ######')
       console.log(this.menuItems);
       console.log('###### From SUBMENU END ######') 
+      this.itemsData={
+        name: '',
+        description: '',
+        price: ''
+      }
   }
   
   ionViewDidLoad() {
 
   }
+  public addItem($event, item: Item) : void{    
+    this._cart.push(item);     
+    console.log(this._cart);    
+    this.storage.set('CartItem', JSON.stringify(this._cart));
+    this.storage.get('CartItem').then((value)=>{
+    console.log(value);
+    })
+  }
+  
 }

@@ -18,7 +18,7 @@
       <p class="center">{{item.description}}</p>
       <button class="submenu-BtnCart">
         <p class="submenu-Calories"><strong>{{item.calories}}</strong></p>
-        <p class="submenu-Message"><strong>Add To Cart</strong></p>
+        <button (click)="addItem($event, item)" class="submenu-Message"><strong>Add To Cart</strong></button>
         <p class="submenu-Price"><strong>$ {{item.price}}</strong></p>
       </button>
     </ion-card-content>

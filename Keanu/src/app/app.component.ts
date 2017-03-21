@@ -7,7 +7,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { SubmenuPage } from '../pages/submenu/submenu';
-
+import { CartPage } from '../pages/cart/cart';
 @Component({
   templateUrl: 'app.html'
 })
@@ -26,8 +26,9 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
       // If no token exists, show login
-      { title: 'Login', component: LoginPage }
+      { title: 'Login', component: LoginPage },
       // If Token exists, show logout
+      { title: 'Cart', component: CartPage }
     ];
   }
 
