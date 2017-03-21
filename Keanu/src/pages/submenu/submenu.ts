@@ -15,7 +15,7 @@ import { Item } from '../../../models'
 })
 export class SubmenuPage {
   public menuItems: Object;
-  public CartItem: any;
+  public cartItem: Object;
   private cartService: CartCallService;
   public itemsData: any;
   _cart = [];
@@ -35,12 +35,13 @@ export class SubmenuPage {
   ionViewDidLoad() {
 
   }
-  public addItem($event, item: Item) : void{    
-    this._cart.push(item);     
-    console.log(this._cart);    
+  public addItem($event, item: Item) : void{
+    this._cart.push(item._id);
+    console.log(this._cart);     
+    //console.log(this._cart);    
     this.storage.set('CartItem', JSON.stringify(this._cart));
     this.storage.get('CartItem').then((value)=>{
-    console.log(value);
+    //console.log(value);
     })
   }
   

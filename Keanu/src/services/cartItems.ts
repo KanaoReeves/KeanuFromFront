@@ -5,28 +5,25 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class CartCallService {
-    private cart: Item[] = [];
-    public menuItems: any;
- constructor(private http: Http, public storage: Storage) {
+    public cartItems: any;
 
-    }
-    public getItems(category) {
+    constructor(private http: Http, public storage: Storage) {
+
+}
+    public getCartItems(_id) {
         return new Promise<Object>((resolve, reject) => {
-            let menu = this.storage.get('CartItem');
-            menu(res => res.json()).subscribe(
+        let menu = this.http.get(`https://keanubackend.herokuapp.com/item/_id/${_id}`).map(res => res.json()).subscribe(
                 data => {
-                    this.menuItems = data.data.items
+                    this.cartItems = data.data.items
                 },
                 err => {
                     console.log("Oops!");
                     reject(null)
                 },
                 () => {
-                    resolve(this.menuItems);
+                    resolve(this.cartItems);
                 }
             );
         })
-
-        //console.log("From GetMenu.ts " + this.menuItems);
     }
 }
