@@ -30,8 +30,7 @@ export class CartPage {
     console.log('in cart loading');
     
     this.cartService.getCartItems().then(itemsData =>{
-      this.cartItems = itemsData;
-      
+      this.cartItems = itemsData;     
     })
   }
 }

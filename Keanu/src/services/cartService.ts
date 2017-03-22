@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Item } from '../../models';
 import { Storage } from '@ionic/storage';
 import { Observable } from "rxjs/Observable";
 
@@ -26,15 +25,29 @@ export class CartService {
 	 */
 	public addToCart(cartItem: Object): void {
 		this.storage.get('cartItem').then(value => {
-
+			//if null sets a new Map
 			this.cartItems = this._nullCheck(value)
-			this.cartItems.set(cartItem['id'], 1)
-
+			// if an item is already in the cart
+			// then increment the quantity
+			let currentQuantity=1
+			if(this.cartItems.has(cartItem['id'])){
+				currentQuantity = this.cartItems.get(cartItem['id'])
+				currentQuantity++;
+			}
+			// set the cart
+			this.cartItems.set(cartItem['id'], currentQuantity)
+			// store the cart
 			this.storage.set('cartItem', this.cartItems)
 		})
 	}
 
-
+	/**
+	 * returns the items data in the cart
+	 * 
+	 * @returns {Promise<Array<Object>>} 
+	 * 
+	 * @memberOf CartService
+	 */
 	public getCartItems(): Promise<Array<Object>> {
 		let cartItemsData = [];
 		return new Promise<Array<Object>>((resolve, request) => {
