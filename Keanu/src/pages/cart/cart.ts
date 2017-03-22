@@ -15,26 +15,24 @@ import { CartService } from '../../services/cartService';
   providers: [CartService]
 })
 export class CartPage {
-  public cartItems;
+  public cartItems: Array<Object>
+  
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
     public http: Http,
-    private storage: Storage, 
-    private cartCall: CartService) {}
+    private storage: Storage,
+    private cartService: CartService) {
+      this.cartItems=new Array<Object>();
+    }
 
   ionViewDidLoad() {
-    //this.cartCall.getCartItems().then(cartItems);
-    //console.log(this.cartItems);
-    //console.log(this.storage.get('cartItem'));
-    //this.cartCall.getCartItems(this.storage.get('cartItem')).then((cartItems) => {
-    this.storage.get('CartItem').then((value)=>{
-    let cart = (value)        
-        for (var i = 0, len = cart.length; i < len; i++){
-            let _id = cart[i]
-            console.log(_id);}
+    console.log('in cart loading');
+    
+    this.cartService.getCartItems().then(itemsData =>{
+      this.cartItems = itemsData;
+      
     })
   }
 }
 
-  
