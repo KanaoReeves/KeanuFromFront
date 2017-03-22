@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { CartCallService } from '../../services/cartItems';
+import { CartService } from '../../services/cartService';
 /*
   Generated class for the Cart page.
 
@@ -12,7 +12,7 @@ import { CartCallService } from '../../services/cartItems';
 @Component({
   selector: 'page-cart',
   templateUrl: 'cart.html',
-  providers: [CartCallService]
+  providers: [CartService]
 })
 export class CartPage {
   public cartItems;
@@ -21,7 +21,7 @@ export class CartPage {
     public navParams: NavParams, 
     public http: Http,
     private storage: Storage, 
-    private cartCall: CartCallService) {}
+    private cartCall: CartService) {}
 
   ionViewDidLoad() {
     //this.cartCall.getCartItems().then(cartItems);

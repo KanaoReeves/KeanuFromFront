@@ -1,52 +1,42 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams } from 'ionic-angular';
-import { CartCallService } from '../../services/cartItems';
+import { CartService } from '../../services/cartService';
 import { Item } from '../../../models'
-/*
-  Generated class for the Submenu page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+
 @Component({
   selector: 'page-submenu',
-  templateUrl: 'submenu.html'
+  templateUrl: 'submenu.html',
+  providers: [CartService]
 })
 export class SubmenuPage {
   public menuItems: Object;
   public cartItem: Object;
-  private cartService: CartCallService;
-  public itemsData: any;
-  _cart = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
-    
-      this.menuItems = this.navParams.get('data');
-      console.log('###### From SUBMENU START ######')
-      console.log(this.menuItems);
-      console.log('###### From SUBMENU END ######') 
-      this.itemsData={
-        name: '',
-        description: '',
-        price: ''
-      }
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private storage: Storage,
+    private cartService: CartService
+  ) {
+
+    this.menuItems = this.navParams.get('data');
   }
-  
-  ionViewDidLoad() {}
+
+  ionViewDidLoad() { }
 
   /**
    * Add item to cart
    * 
-   * @param {any} $event 
    * @param {Item} item 
    * 
    * @memberOf SubmenuPage
    */
-  public addItem($event, item: Item) : void{
-    // @keven: note the Object now includes quantity
-    this._cart.push({'id': item._id, 'quantity': 1}); 
-    this.storage.set('CartItem', this._cart);
-    console.log(this.storage.get('CartItem'));
+  public addItem(itemId: String): void {
+    console.log('itemID is : '+itemId);
+    
+    this.cartService.addToCart({ 'id': itemId, 'quantity': 1 })
   }
-  
+
 }
