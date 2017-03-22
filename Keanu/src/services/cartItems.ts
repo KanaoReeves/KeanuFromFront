@@ -30,9 +30,9 @@ export class CartCallService {
         this.storage.get('CartItem').then((value)=>{
             let cart = (value)        
         for (var i = 0, len = cart.length; i < len; i++){
-            _id = cart[i];
+            //_id = cart[i];
         return new Promise<Object>((resolve, reject) => {
-            let menu = this.http.get(`https://keanubackend.herokuapp.com/item/id/${_id}`).map(res => res.json()).subscribe(
+            let menu = this.http.get(`https://keanubackend.herokuapp.com/item/id/${cart[i]}`).map(res => res.json()).subscribe(
                 data => {
                     this.cartItems = data.data.items
                 },
