@@ -24,7 +24,7 @@ export class CartPage {
     private cartCall: CartCallService) {}
 
   ionViewDidLoad() {
-    //this.cartCall.getCartItems().then(cartItems);
+    this.cartCall.getCartItems();
     //console.log(this.cartItems);
     //console.log(this.storage.get('cartItem'));
     //this.cartCall.getCartItems(this.storage.get('cartItem')).then((cartItems) => {
@@ -32,6 +32,7 @@ export class CartPage {
     let cart = (value)        
         for (var i = 0, len = cart.length; i < len; i++){
             let _id = cart[i]
+            let menu = this.http.get(`https://keanubackend.herokuapp.com/item/id/${cart[i]}`)
             console.log(_id);}
     })
   }

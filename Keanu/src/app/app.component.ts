@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { SubmenuPage } from '../pages/submenu/submenu';
 import { CartPage } from '../pages/cart/cart';
+import { AdminPage } from '../pages/admin/admin';
 @Component({
   templateUrl: 'app.html'
 })
@@ -28,7 +29,8 @@ export class MyApp {
       // If no token exists, show login
       { title: 'Login', component: LoginPage },
       // If Token exists, show logout
-      { title: 'Cart', component: CartPage }
+      { title: 'Cart', component: CartPage },
+      {title: 'Admin Page', component: AdminPage}
     ];
   }
 
@@ -44,6 +46,7 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
+    
     this.nav.setRoot(page.component);
   }
 }
