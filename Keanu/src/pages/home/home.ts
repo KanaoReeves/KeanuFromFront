@@ -19,7 +19,7 @@ export class HomePage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public http: Http, 
-    private menuCall: MenuCallService, 
+    private menuCall: MenuCallService,    
     private storage: Storage) {}
 
   public launchSubMenuPage(type: string): void {

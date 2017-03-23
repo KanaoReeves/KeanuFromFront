@@ -6,7 +6,7 @@ import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { RegisterPage } from '../pages/register/register';
 import { PaymentInfoPage } from '../pages/paymentInfo/paymentInfo';
-
+import { CartPage } from '../pages/cart/cart';
 import { SubmenuPage } from '../pages/submenu/submenu';
 import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 
@@ -18,7 +18,9 @@ import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
     RegisterPage,
     PaymentInfoPage,
     SubmenuPage,
-    RestaurantinfoPage  
+    RestaurantinfoPage,  
+    CartPage
+
 
   ],
   imports: [
@@ -32,7 +34,9 @@ import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
     HomePage,
     PaymentInfoPage,
     SubmenuPage,
-    RestaurantinfoPage
+    RestaurantinfoPage,
+    CartPage
+
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })

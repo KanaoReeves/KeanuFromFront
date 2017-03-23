@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { SubmenuPage } from '../pages/submenu/submenu';
 import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
+import { CartPage } from '../pages/cart/cart';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,8 +30,9 @@ export class MyApp {
       // If no token exists, show login
       { title: 'Login', component: LoginPage },
       //Restaurant infomation page
-      { title: 'Restaurant Info', component: RestaurantinfoPage}
+      { title: 'Restaurant Info', component: RestaurantinfoPage},
       // If Token exists, show logout
+      { title: 'Cart', component: CartPage }
     ];
   }
 
