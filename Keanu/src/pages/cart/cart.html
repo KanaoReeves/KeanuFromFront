@@ -1,0 +1,30 @@
+<!--
+  Generated template for the Cart page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>Cart</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card *ngFor="let cartItem of cartItems">
+    <ion-card-content>
+      <ion-card-title class="center">{{cartItem.item.data.item.name}}</ion-card-title>
+      <img src="{{cartItem.item.data.item.imageURL}}">
+      <p class="center">{{cartItem.item.data.item.description}}</p>
+      <p>{{cartItem.quantity}} items</p>
+      <button class="submenu-BtnCart">
+      <p class="submenu-Price"><strong>$ {{cartItem.item.data.item.price}}</strong></p>
+      </button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
