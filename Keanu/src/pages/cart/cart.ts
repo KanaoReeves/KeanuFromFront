@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { CartCallService } from '../../services/cartItems';
+import { CartService } from '../../services/cartService';
 /*
   Generated class for the Cart page.
 
@@ -12,18 +12,22 @@ import { CartCallService } from '../../services/cartItems';
 @Component({
   selector: 'page-cart',
   templateUrl: 'cart.html',
-  providers: [CartCallService]
+  providers: [CartService]
 })
 export class CartPage {
-  public cartItems;
+  public cartItems: Array<Object>
+  
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
     public http: Http,
-    private storage: Storage, 
-    private cartCall: CartCallService) {}
+    private storage: Storage,
+    private cartService: CartService) {
+      this.cartItems=new Array<Object>();
+    }
 
   ionViewDidLoad() {
+<<<<<<< HEAD
     this.cartCall.getCartItems();
     //console.log(this.cartItems);
     //console.log(this.storage.get('cartItem'));
@@ -34,8 +38,13 @@ export class CartPage {
             let _id = cart[i]
             let menu = this.http.get(`https://keanubackend.herokuapp.com/item/id/${cart[i]}`)
             console.log(_id);}
+=======
+    console.log('in cart loading');
+    
+    this.cartService.getCartItems().then(itemsData =>{
+      this.cartItems = itemsData;     
+>>>>>>> 022ef9e5708530a69ac35019362e382a8bd67365
     })
   }
 }
 
-  
