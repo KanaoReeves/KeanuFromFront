@@ -8,6 +8,9 @@ import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { SubmenuPage } from '../pages/submenu/submenu';
 import { CartPage } from '../pages/cart/cart';
+// Just for Testing
+import { OrderPage } from '../pages/order/order';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -25,10 +28,10 @@ export class MyApp {
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
-      // If no token exists, show login
+      { title: 'Cart', component: CartPage },
       { title: 'Login', component: LoginPage },
-      // If Token exists, show logout
-      { title: 'Cart', component: CartPage }
+      // Just for Testing
+      { title: 'Order', component: OrderPage}
     ];
   }
 
