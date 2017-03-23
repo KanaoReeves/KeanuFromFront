@@ -6,6 +6,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class CartService {
 	public cartItems: Map<String, number>;
+	private _cartName: string;
 
 	/**
 	 *
@@ -17,27 +18,45 @@ export class CartService {
 	 */
 	constructor(private http: Http, public storage: Storage) {
 		this.cartItems = new Map<String, number>();
+		this._cartName = 'cartItem';
 	}
 
 	/**
-	 * Adds and item to the cart
+	 * Adds and item to the cart if an item
+	 * is in a cart it will update the
+	 * quantity of that item
 	 * @param cartItem 
 	 */
 	public addToCart(cartItem: Object): void {
-		this.storage.get('cartItem').then(value => {
+		this.storage.get(this._cartName).then(value => {
 			//if null sets a new Map
 			this.cartItems = this._nullCheck(value)
 			// if an item is already in the cart
 			// then increment the quantity
-			let currentQuantity=1
-			if(this.cartItems.has(cartItem['id'])){
+			let currentQuantity = 1
+			if (this.cartItems.has(cartItem['id'])) {
 				currentQuantity = this.cartItems.get(cartItem['id'])
 				currentQuantity++;
 			}
 			// set the cart
 			this.cartItems.set(cartItem['id'], currentQuantity)
 			// store the cart
-			this.storage.set('cartItem', this.cartItems)
+			this.storage.set(this._cartName, this.cartItems)
+		})
+	}
+
+	/**
+	 * Deletes an item from the cart using 
+	 * using the item id
+	 * 
+	 * @param {string} itemID 
+	 * 
+	 * @memberOf CartService
+	 */
+	public deleteFromCart(itemID: string) {
+		this.storage.get(this._cartName).then((cart: Map<String, number>) => {
+			cart.delete(itemID)
+			this.storage.set(this._cartName, cart)
 		})
 	}
 
@@ -51,7 +70,7 @@ export class CartService {
 	public getCartItems(): Promise<Array<Object>> {
 		let cartItemsData = [];
 		return new Promise<Array<Object>>((resolve, request) => {
-			this.storage.get('cartItem').then(value => {
+			this.storage.get(this._cartName).then(value => {
 
 				this.cartItems = this._nullCheck(value)
 				let index: number = 0;
@@ -81,7 +100,35 @@ export class CartService {
 
 	}
 
-	private _nullCheck(value){
+	/**
+	 * returns an object that can easily converted
+	 * to JSON. This is used for passing the cart
+	 * object to the back end
+	 * 
+	 * @returns {Promise<Array<Object>>} 
+	 * 
+	 * @memberOf CartService
+	 */
+	public getCartAsObject(): Promise<Array<Object>> {
+
+		return new Promise<Array<Object>>((resolve, reject) => {
+			this.storage.get(this._cartName).then((cart: Map<String, number>) => {
+				let cartObject = new Array<Object>();
+				cart.forEach((value:number, key:string)=>{
+					cartObject.push({
+						'itemId': key,
+						'quantity': value
+					})
+				})//for each 
+
+				resolve(cartObject);
+			})
+		})
+
+
+	}
+
+	private _nullCheck(value) {
 		return value == null ? new Map<String, number>() : value;
 	}
 }
