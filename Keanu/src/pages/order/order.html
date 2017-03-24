@@ -16,5 +16,9 @@
 
 
 <ion-content padding>
-
+  <ion-card *ngFor="let cartItem of cartItems">
+    <ion-card-content>
+      <ion-card-title class="center">{{cartItem.id}}</ion-card-title>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
