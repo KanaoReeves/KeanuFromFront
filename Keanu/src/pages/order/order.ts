@@ -28,8 +28,10 @@ export class OrderPage {
 
     this.cartService.getCartAsObject().then(itemsData => {
       this.cartItems = itemsData;
+
+      
       // Code can go in here
-      console.log("Inside Loop" + this.cartItems);
+      console.log(this.cartItems);
     })
   }
 }

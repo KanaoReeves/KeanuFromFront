@@ -14,11 +14,17 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-  <ion-card *ngFor="let cartItem of cartItems">
-    <ion-card-content>
-      <ion-card-title class="center">{{cartItem.id}}</ion-card-title>
-    </ion-card-content>
-  </ion-card>
+
+  <ion-list>
+    <ion-item *ngFor="let cartItem of cartItems">
+      <ion-avatar item-left>
+        <img src="http://food.fnr.sndimg.com/content/dam/images/food/fullset/2015/5/28/2/TM1A14F_Garlic-Bread_s4x3.jpg.rend.hgtvcom.1280.960.jpeg">
+      </ion-avatar>
+      <h2>{{cartItem.itemId}}</h2>
+      <h3>{{cartItem.quantity}}</h3>
+      <p>Price</p>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
