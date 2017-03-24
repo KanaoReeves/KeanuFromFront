@@ -12,7 +12,7 @@ import { CartService } from '../../services/cartService';
   providers: [CartService]
 })
 export class OrderPage {
-  public cartItems: Object
+  public cartItems: Array<Object>
 
   constructor(
     public navCtrl: NavController,
@@ -20,6 +20,7 @@ export class OrderPage {
     public http: Http,
     private storage: Storage,
     private cartService: CartService) {
+      this.cartItems = new Array<Object>();
   }
 
   ionViewDidLoad() {
@@ -28,7 +29,7 @@ export class OrderPage {
     this.cartService.getCartAsObject().then(itemsData => {
       this.cartItems = itemsData;
       // Code can go in here
-
+      console.log("Inside Loop" + this.cartItems);
     })
   }
 }
