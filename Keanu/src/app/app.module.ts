@@ -8,6 +8,7 @@ import { RegisterPage } from '../pages/register/register';
 import { PaymentInfoPage } from '../pages/paymentInfo/paymentInfo';
 import { CartPage } from '../pages/cart/cart';
 import { SubmenuPage } from '../pages/submenu/submenu';
+import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { SubmenuPage } from '../pages/submenu/submenu';
     RegisterPage,
     PaymentInfoPage,
     SubmenuPage,
+    RestaurantinfoPage,  
     CartPage
+
 
   ],
   imports: [
@@ -31,7 +34,9 @@ import { SubmenuPage } from '../pages/submenu/submenu';
     HomePage,
     PaymentInfoPage,
     SubmenuPage,
+    RestaurantinfoPage,
     CartPage
+
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })
