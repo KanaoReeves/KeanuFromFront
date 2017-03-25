@@ -41,7 +41,6 @@ export class OrderPage {
         this.cartItem = element;
          this.itemService.GetItem(this.cartItem.itemId, this.cartItem.quantity).then((data) => {
             this.orderItems.push(data);
-            console.log(this.orderItems);
          })
 
         /*

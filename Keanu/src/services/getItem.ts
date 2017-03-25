@@ -19,6 +19,7 @@ export class ItemService {
                     this.orderItem.price = this.menuItem.price * quantity;
                     this.orderItem.imageURL = this.menuItem.imageURL;
                     this.orderItem.quantity = quantity;
+                    alert(this.orderItem.price);
                 },
                 err => {
                     console.log("Oops!");
