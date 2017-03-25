@@ -13,6 +13,7 @@ import { Item } from '../../../models'
 export class SubmenuPage {
   public menuItems: Object;
   public cartItem: Object;
+  public isAdmin: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -22,6 +23,9 @@ export class SubmenuPage {
   ) {
 
     this.menuItems = this.navParams.get('data');
+    this.storage.get('adminRights').then(value => {
+      this.isAdmin = value
+    })
   }
 
   ionViewDidLoad() { }
@@ -34,8 +38,8 @@ export class SubmenuPage {
    * @memberOf SubmenuPage
    */
   public addItem(itemId: String): void {
-    console.log('itemID is : '+itemId);
-    
+    console.log('itemID is : ' + itemId);
+
     this.cartService.addToCart({ 'id': itemId, 'quantity': 1 })
   }
 
