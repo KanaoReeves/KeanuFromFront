@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams } from 'ionic-angular';
 import { CartService } from '../../services/cartService';
-import { Item } from '../../../models'
+import { Item } from '../../../models';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 
 @Component({
@@ -19,14 +20,44 @@ export class SubmenuPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private storage: Storage,
-    private cartService: CartService
+    private cartService: CartService,
+    private http: Http
   ) {
 
     this.menuItems = this.navParams.get('data');
     this.storage.get('adminRights').then(value => {
       this.isAdmin = value
+
+
     })
   }
+  public deleteClick(id: String): void {
+    let link = 'https://keanubackend.herokuapp.com/admin/item/delete/' + id;
+    console.log(id);
+    
+
+    this.storage.get('token').then(value => {
+      console.log(value);
+      
+      let headers = new Headers();
+      headers.append('token', value)
+
+      let options = new RequestOptions({ headers: headers });
+      
+      this.http.post(link, '',options)
+        .subscribe(
+        data => { },
+        err => {
+          console.log('error')
+          console.log(err);
+        },
+        () => { }
+        )
+
+    })
+
+  }
+
 
   ionViewDidLoad() { }
 
