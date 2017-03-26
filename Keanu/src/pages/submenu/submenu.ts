@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { CartService } from '../../services/cartService';
 import { Item } from '../../../models';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -12,7 +12,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
   providers: [CartService]
 })
 export class SubmenuPage {
-  public menuItems: Object;
+  public menuItems: Array<Object>;
   public cartItem: Object;
   public isAdmin: boolean;
 
@@ -21,7 +21,8 @@ export class SubmenuPage {
     public navParams: NavParams,
     private storage: Storage,
     private cartService: CartService,
-    private http: Http
+    private http: Http,
+    private loadingCtrl: LoadingController
   ) {
 
     this.menuItems = this.navParams.get('data');
@@ -33,12 +34,11 @@ export class SubmenuPage {
   }
   public deleteClick(id: String): void {
     let link = 'https://keanubackend.herokuapp.com/admin/item/delete/' + id;
-    console.log(id);
-    
+    let loader: Loading = this.loadingCtrl.create({content: 'Deleting item'})
+    loader.present();
 
     this.storage.get('token').then(value => {
-      console.log(value);
-      
+       
       let headers = new Headers();
       headers.append('token', value)
 
@@ -51,7 +51,14 @@ export class SubmenuPage {
           console.log('error')
           console.log(err);
         },
-        () => { }
+        () => {
+          loader.dismiss()
+          for(let i=0; i < this.menuItems.length;i++){
+            if (this.menuItems[i]['_id']===id) {
+              this.menuItems.splice(i, 1);
+            }
+          }
+        }
         )
 
     })
