@@ -19,21 +19,29 @@ export class MyApp {
   // Setting the root page to HomePage
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform,
+    public storage: Storage) {
     this.initializeApp();
 
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
       //Restaurant infomation page
-      { title: 'Restaurant Info', component: RestaurantinfoPage},
+      { title: 'Restaurant Info', component: RestaurantinfoPage },
       // If Token exists, show logout
       { title: 'Cart', component: CartPage }
     ];
 
-    
+    this.storage.get('token').then((value: string) => {
+      if (value == null || value == "") {
+        this.pages.push({ title: 'Login', component: LoginPage });
+      }
+      else {
+        this.pages.push({ title: 'Logout', component: LoginPage });
+      }
+    })
   }
 
   initializeApp() {
@@ -46,8 +54,20 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (page.title == "Logout") {
+      alert("You have successfully logged out")
+      this.storage.remove('token')
+      this.pages.pop();
+      this.pages.push({ title: 'Login', component: LoginPage })
+      this.nav.setRoot(HomePage);
+    }
+
+    this.storage.get('token').then((value: string) => {
+      if(value != "" && value != null){
+        this.pages.pop();
+        this.pages.push({ title: 'Logout', component: LoginPage })
+      }
+      this.nav.setRoot(page.component)
+    });
   }
 }
