@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-
+import { Storage } from '@ionic/storage';
 
 // Keanu Pages
 import { LoginPage } from '../pages/login/login';
@@ -27,13 +27,13 @@ export class MyApp {
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
-      // If no token exists, show login
-      { title: 'Login', component: LoginPage },
       //Restaurant infomation page
       { title: 'Restaurant Info', component: RestaurantinfoPage},
       // If Token exists, show logout
       { title: 'Cart', component: CartPage }
     ];
+
+    
   }
 
   initializeApp() {
