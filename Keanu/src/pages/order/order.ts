@@ -68,24 +68,24 @@ export class OrderPage {
     }
 
     this.storage.get('token').then(value => {
-    
-    let headers = new Headers();
-    headers.append('token', value)
-    
-    let options = new RequestOptions({
-      headers: headers,
-      body: JSON.stringify(confirmOrder)
-    })
 
-    this.http.get('https://keanubackend.herokuapp.com/order/add', options).map(res => res.json()).subscribe(
+      let headers = new Headers();
+      headers.append('token', value)
+
+      let options = new RequestOptions({
+        headers: headers,
+        body: JSON.stringify(confirmOrder)
+      })
+
+      this.http.get('https://keanubackend.herokuapp.com/order/add', options).map(res => res.json()).subscribe(
         data => {
           console.log(data);
         }, err => {
           console.log(err);
         },
       )
-  })
-}
+    })
+  }
 
   ionViewDidLoad() {
     console.log('In Order Page');
