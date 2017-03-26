@@ -16,7 +16,7 @@ import { ItemService } from '../../services/getItem';
 export class OrderPage {
   public cartItems: Array<any>
   public cartItem: { itemId: String, quantity: Number }
-  public orderItems: Array<any>
+  public orderItems: Object
 
   constructor(
     public navCtrl: NavController,
@@ -34,21 +34,27 @@ export class OrderPage {
   ionViewDidLoad() {
     console.log('In Order Page');
 
+    // What am I supposed to do.
+    // Get the cart from cart service
+
     this.cartService.getCartAsObject().then(itemsData => {
       this.cartItems = itemsData;
 
-      this.cartItems.forEach(element => {
+      // Correct cart and it has both id and quantity
+      //console.log(this.cartItems);
+
+      // Now I'll want to pass in the cart into the method GetItem
+      this.itemService.GetItem(this.cartItems).then((data) => {
+        this.orderItems = data;
+      })
+
+
+      /*this.cartItems.forEach(element => {
         this.cartItem = element;
          this.itemService.GetItem(this.cartItem.itemId, this.cartItem.quantity).then((data) => {
             this.orderItems.push(data);
          })
-
-        /*
-          this.orderItems.push(data)
-          this.orderItem.push(", this.cartItem.quantity, )
-            console.log(this.orderItems);
-        })*/
-      })
+      })*/
     })
   }
 }

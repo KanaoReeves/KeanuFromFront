@@ -31,6 +31,7 @@ export class CartPage {
     
     this.cartService.getCartItems().then(itemsData =>{
       this.cartItems = itemsData;     
+      console.log(itemsData)
     })
   }
 }
