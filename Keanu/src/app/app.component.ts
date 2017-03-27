@@ -33,10 +33,14 @@ export class MyApp {
       { title: 'Restaurant Info', component: RestaurantinfoPage },
       // If Token exists, show logout
       { title: 'Cart', component: CartPage },
-      // admin page
-      { title: 'Admin', component: AdminPage}
     ];
 
+    // push admin page if user is an admin
+    this.storage.get('adminRights').then((value: boolean)=>{
+      this.pages.push({ title: 'Admin', component: AdminPage})
+    })
+
+    // if token is available show login page
     this.storage.get('token').then((value: string) => {
       if (value == null || value == "") {
         this.pages.push({ title: 'Login', component: LoginPage });
