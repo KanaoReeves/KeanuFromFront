@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, RequestOptions, Headers, } from '@angular/http';
 import { Storage } from '@ionic/storage';
