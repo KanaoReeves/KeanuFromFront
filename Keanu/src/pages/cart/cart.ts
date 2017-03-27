@@ -35,6 +35,7 @@ export class CartPage {
   }
 
   ionViewDidLoad() {
+
     console.log('in cart loading');
     
     this.cartService.getCartItems().then(itemsData =>{

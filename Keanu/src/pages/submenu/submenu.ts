@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { CartService } from '../../services/cartService';
-import { Item } from '../../../models'
+import { Item } from '../../../models';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 
 @Component({
@@ -11,18 +12,59 @@ import { Item } from '../../../models'
   providers: [CartService]
 })
 export class SubmenuPage {
-  public menuItems: Object;
+  public menuItems: Array<Object>;
   public cartItem: Object;
+  public isAdmin: boolean;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private storage: Storage,
-    private cartService: CartService
+    private cartService: CartService,
+    private http: Http,
+    private loadingCtrl: LoadingController
   ) {
 
     this.menuItems = this.navParams.get('data');
+    this.storage.get('adminRights').then(value => {
+      this.isAdmin = value
+
+
+    })
   }
+  public deleteClick(id: String): void {
+    let link = 'https://keanubackend.herokuapp.com/admin/item/delete/' + id;
+    let loader: Loading = this.loadingCtrl.create({content: 'Deleting item'})
+    loader.present();
+
+    this.storage.get('token').then(value => {
+       
+      let headers = new Headers();
+      headers.append('token', value)
+
+      let options = new RequestOptions({ headers: headers });
+      
+      this.http.post(link, '',options)
+        .subscribe(
+        data => { },
+        err => {
+          console.log('error')
+          console.log(err);
+        },
+        () => {
+          loader.dismiss()
+          for(let i=0; i < this.menuItems.length;i++){
+            if (this.menuItems[i]['_id']===id) {
+              this.menuItems.splice(i, 1);
+            }
+          }
+        }
+        )
+
+    })
+
+  }
+
 
   ionViewDidLoad() { }
 
@@ -34,8 +76,8 @@ export class SubmenuPage {
    * @memberOf SubmenuPage
    */
   public addItem(itemId: String): void {
-    console.log('itemID is : '+itemId);
-    
+    console.log('itemID is : ' + itemId);
+
     this.cartService.addToCart({ 'id': itemId, 'quantity': 1 })
   }
 

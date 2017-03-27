@@ -51,6 +51,7 @@ export class LoginPage {
             data => {
               console.log(data.json()['data']['token']);
               this.storage.set('token',data.json()['data']['token'])
+              this.storage.set('adminRights',data.json()['data']['adminRights'])
             },
             err => {
               console.log("ERROR!: ", err);

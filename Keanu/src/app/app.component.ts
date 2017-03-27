@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-
+import { Storage } from '@ionic/storage';
 
 // Keanu Pages
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { SubmenuPage } from '../pages/submenu/submenu';
+import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
+import { AdminPage } from '../pages/admin/admin';
 import { CartPage } from '../pages/cart/cart';
 
 @Component({
@@ -18,17 +20,36 @@ export class MyApp {
   // Setting the root page to HomePage
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform,
+    public storage: Storage) {
     this.initializeApp();
 
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
+      //Restaurant infomation page
+      { title: 'Restaurant Info', component: RestaurantinfoPage },
+      // If Token exists, show logout
       { title: 'Cart', component: CartPage },
-      { title: 'Login', component: LoginPage },
     ];
+
+    // push admin page if user is an admin
+    this.storage.get('adminRights').then((value: boolean)=>{
+      this.pages.push({ title: 'Admin', component: AdminPage})
+    })
+
+    // if token is available show login page
+    this.storage.get('token').then((value: string) => {
+      if (value == null || value == "") {
+        this.pages.push({ title: 'Login', component: LoginPage });
+      }
+      else {
+        this.pages.push({ title: 'Logout', component: LoginPage });
+      }
+    })
+
   }
 
   initializeApp() {
@@ -41,8 +62,20 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (page.title == "Logout") {
+      alert("You have successfully logged out")
+      this.storage.remove('token')
+      this.pages.pop();
+      this.pages.push({ title: 'Login', component: LoginPage })
+      this.nav.setRoot(HomePage);
+    }
+
+    this.storage.get('token').then((value: string) => {
+      if(value != "" && value != null){
+        this.pages.pop();
+        this.pages.push({ title: 'Logout', component: LoginPage })
+      }
+      this.nav.setRoot(page.component)
+    });
   }
 }
