@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { Http, RequestOptions, Headers, } from '@angular/http';
 import { Storage } from '@ionic/storage';
+import { HomePage } from '../home/home';
 import { CartService } from '../../services/cartService';
 import { ItemService } from '../../services/getItem';
 
 // I only post to the backend once the button is clicked on this page
-
 @Component({
   selector: 'page-order',
   templateUrl: 'order.html',
@@ -15,7 +15,9 @@ import { ItemService } from '../../services/getItem';
 
 export class OrderPage {
   public cartItems: Array<any>
-  public cartItem: { itemId: String, quantity: Number }
+  public cartItem: { itemId: string, quantity: Number }
+  public orderItem: { [key: string]: Number }
+  public orderItemSent: Array<{ [key: string]: Number }>
   public orderItems: Array<{ name: String, price: any, imageURL: String, quantity: Number }>
   public totalPrice: { subTotal: number, tax: number; total: number }
   public paymentInformation: Object
@@ -27,10 +29,12 @@ export class OrderPage {
     public request: RequestOptions,
     private storage: Storage,
     private cartService: CartService,
-    private itemService: ItemService) {
+    private itemService: ItemService,
+    private alertCtrl: AlertController) {
     this.cartItems = new Array<any>()
     this.orderItems = new Array<any>()
     this.totalPrice = { subTotal: 0, tax: 0, total: 0 }
+    this.orderItemSent = new Array<{ "": 0 }>()
     this.paymentInformation = new Object
   }
 
@@ -53,36 +57,54 @@ export class OrderPage {
   }
 
   public ConfirmOrder() {
+    // Service GetDate
     let dateObj = new Date();
     let month = dateObj.getUTCMonth() + 1; //months from 1-12
     let day = dateObj.getUTCDate();
     let year = dateObj.getUTCFullYear();
     let newdate = day + ":" + month + ":" + year
 
-    alert("Your order is on its way");
-    let confirmOrder = {
-      "date": newdate,
-      "delivery": false,
-      "items": this.orderItems,
-      "price": this.totalPrice.total
-    }
+    this.alertCtrl.create({
+      title: 'Order Confirmation',
+      subTitle: 'Your order is confirmed and on its way',
+      buttons: ['Okay']
+    }).present();
 
     this.storage.get('token').then(value => {
+
+
+      this.cartItems.forEach(element => {
+        this.orderItem = { [element.itemId]: element.quantity }
+        this.orderItemSent.push(this.orderItem);
+      });
+
+      let confirmOrder = {
+        "date": newdate,
+        "delivery": false,
+        "items": this.orderItemSent,
+        "price": this.totalPrice.total
+      }
+
+      console.log(JSON.stringify(confirmOrder));
 
       let headers = new Headers();
       headers.append('token', value)
 
       let options = new RequestOptions({
-        headers: headers,
-        body: JSON.stringify(confirmOrder)
+        headers: headers
       })
 
-      this.http.get('https://keanubackend.herokuapp.com/order/add', options).map(res => res.json()).subscribe(
+      let body = confirmOrder;
+
+      this.http.post('https://keanubackend.herokuapp.com/order/add', body, options).map(res => res.json()).subscribe(
         data => {
           console.log(data);
         }, err => {
           console.log(err);
         },
+        () => {
+          this.navCtrl.setRoot(HomePage);
+        }
       )
     })
   }
@@ -103,12 +125,15 @@ export class OrderPage {
         // Create a http request with a header
         this.GetPaymentInfo();
 
+        // Create a Service for getting these
         this.orderItems.forEach(element => {
           this.totalPrice.subTotal += element.price
+          this.totalPrice.subTotal = Math.round(this.totalPrice.subTotal * 100) / 100
+          console.log(this.totalPrice.subTotal)
         });
 
-        this.totalPrice.tax = (this.totalPrice.subTotal * .13)
-        this.totalPrice.total = (this.totalPrice.subTotal + this.totalPrice.tax)
+        this.totalPrice.tax = Math.round((this.totalPrice.subTotal * .13) * 100) / 100
+        this.totalPrice.total = Math.round((this.totalPrice.subTotal + this.totalPrice.tax) * 100) / 100
       });
     })
   }
