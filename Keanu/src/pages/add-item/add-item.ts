@@ -42,8 +42,8 @@ export class AddItemPage {
           'name': this.name,
           'description': this.description,
           'imageURL': this.imageURL,
-          'price': this.price,
-          'calories': this.calories,
+          'price': Number(this.price),
+          'calories': Number(this.calories),
           'category': this.category,
           'tags': [this.tags],
 
