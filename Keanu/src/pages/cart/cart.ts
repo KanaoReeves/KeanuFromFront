@@ -17,6 +17,7 @@ import { OrderPage } from '../order/order'
 })
 export class CartPage {
   public cartItems: Array<Object>
+  public delivery: boolean;
   
   constructor(
     public navCtrl: NavController,
@@ -25,15 +26,12 @@ export class CartPage {
     private storage: Storage,
     private cartService: CartService) {
       this.cartItems=new Array<Object>();
+      this.delivery = false;
     }
 
   public GoOrderPage(){
-    console.log("Hello World");
+    
     this.navCtrl.push(OrderPage);
-  }
-
-  public DeliveryType(){
-
   }
 
   ionViewDidLoad() {
