@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { SubmenuPage } from '../pages/submenu/submenu';
 import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
+import { AdminPage } from '../pages/admin/admin';
 import { CartPage } from '../pages/cart/cart';
 
 @Component({
@@ -31,9 +32,15 @@ export class MyApp {
       //Restaurant infomation page
       { title: 'Restaurant Info', component: RestaurantinfoPage },
       // If Token exists, show logout
-      { title: 'Cart', component: CartPage }
+      { title: 'Cart', component: CartPage },
     ];
 
+    // push admin page if user is an admin
+    this.storage.get('adminRights').then((value: boolean)=>{
+      this.pages.push({ title: 'Admin', component: AdminPage})
+    })
+
+    // if token is available show login page
     this.storage.get('token').then((value: string) => {
       if (value == null || value == "") {
         this.pages.push({ title: 'Login', component: LoginPage });
@@ -42,6 +49,7 @@ export class MyApp {
         this.pages.push({ title: 'Logout', component: LoginPage });
       }
     })
+
   }
 
   initializeApp() {
