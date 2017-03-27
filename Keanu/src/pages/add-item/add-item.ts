@@ -48,7 +48,6 @@ export class AddItemPage {
           'tags': [this.tags],
 
         };
-      console.log(data);
       this.http.post(link, data, { headers: header })
         .subscribe(
         data => { console.log(data) },
