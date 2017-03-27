@@ -27,23 +27,11 @@ export class CartPage {
     }
 
   ionViewDidLoad() {
-<<<<<<< HEAD
-    this.cartCall.getCartItems();
-    //console.log(this.cartItems);
-    //console.log(this.storage.get('cartItem'));
-    //this.cartCall.getCartItems(this.storage.get('cartItem')).then((cartItems) => {
-    this.storage.get('CartItem').then((value)=>{
-    let cart = (value)        
-        for (var i = 0, len = cart.length; i < len; i++){
-            let _id = cart[i]
-            let menu = this.http.get(`https://keanubackend.herokuapp.com/item/id/${cart[i]}`)
-            console.log(_id);}
-=======
+
     console.log('in cart loading');
     
     this.cartService.getCartItems().then(itemsData =>{
       this.cartItems = itemsData;     
->>>>>>> 022ef9e5708530a69ac35019362e382a8bd67365
     })
   }
 }
