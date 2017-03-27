@@ -8,6 +8,7 @@ import { RegisterPage } from '../pages/register/register';
 import { PaymentInfoPage } from '../pages/paymentInfo/paymentInfo';
 import { CartPage } from '../pages/cart/cart';
 import { SubmenuPage } from '../pages/submenu/submenu';
+import { OrderPage } from '../pages/order/order'
 import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 import { AdminPage } from '../pages/admin/admin';
 import { AddItemPage } from '../pages/add-item/add-item';
@@ -20,6 +21,7 @@ import { AddItemPage } from '../pages/add-item/add-item';
     RegisterPage,
     PaymentInfoPage,
     SubmenuPage,
+    OrderPage,
     RestaurantinfoPage,  
     CartPage,
     AdminPage,
@@ -36,6 +38,7 @@ import { AddItemPage } from '../pages/add-item/add-item';
     HomePage,
     PaymentInfoPage,
     SubmenuPage,
+    OrderPage,
     RestaurantinfoPage,
     CartPage,
     AdminPage,

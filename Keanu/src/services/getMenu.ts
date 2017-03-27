@@ -5,9 +5,7 @@ import { Http } from '@angular/http';
 export class MenuCallService {
     public menuItems: any;
 
-    constructor(private http: Http) {
-
-    }
+    constructor(private http: Http) {}
 
     public getMenu(category) {
         return new Promise<Object>((resolve, reject) => {
