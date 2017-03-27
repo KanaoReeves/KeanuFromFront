@@ -12,10 +12,10 @@ export class AddItemPage {
   public name: string;
   public description: string;
   public imageURL: string;
-  public price: string;
-  public calories: string;
+  public price: number;
+  public calories: number;
   public category: string;
-  public tags: string;
+  public tags: Array<string>;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams, 
@@ -26,10 +26,10 @@ export class AddItemPage {
     this.name= '';
     this.description= '';
     this.imageURL= '';
-    this.price= '';
-    this.calories= '';
+    this.price= null;
+    this.calories= null;
     this.category= '';
-    this.tags= '';
+    this.tags= [];
   }
 
   public addItem(): void {
@@ -49,7 +49,7 @@ export class AddItemPage {
 
       };
       console.log(data);
-    this.http.post(link, data, header)
+    this.http.post(link, data, {Headers: header})
       .subscribe(
       data => { },
       err => {
