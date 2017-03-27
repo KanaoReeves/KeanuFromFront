@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { CartService } from '../../services/cartService';
+import { OrderPage } from '../order/order'
 /*
   Generated class for the Cart page.
 
@@ -25,6 +26,15 @@ export class CartPage {
     private cartService: CartService) {
       this.cartItems=new Array<Object>();
     }
+
+  public GoOrderPage(){
+    console.log("Hello World");
+    this.navCtrl.push(OrderPage);
+  }
+
+  public DeliveryType(){
+
+  }
 
   ionViewDidLoad() {
     console.log('in cart loading');
