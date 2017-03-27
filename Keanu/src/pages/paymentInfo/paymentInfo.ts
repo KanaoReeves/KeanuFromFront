@@ -40,7 +40,7 @@ export class PaymentInfoPage {
   }
   public Register(): void {
     let link = 'https://keanubackend.herokuapp.com/login/register'
-    let header = new Headers({ 'Content-Type': 'application/json', 'token': value })
+    let header = new Headers({ 'Content-Type': 'application/json' })
     let data =
       {
         'username': this.username,
