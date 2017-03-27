@@ -8,8 +8,7 @@ import { RegisterPage } from '../pages/register/register';
 import { PaymentInfoPage } from '../pages/paymentInfo/paymentInfo';
 import { CartPage } from '../pages/cart/cart';
 import { SubmenuPage } from '../pages/submenu/submenu';
-import { AdminPage } from '../pages/admin/admin';
-import { AddItemPage } from '../pages/add-item/add-item';
+import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 
 @NgModule({
   declarations: [
@@ -19,9 +18,9 @@ import { AddItemPage } from '../pages/add-item/add-item';
     RegisterPage,
     PaymentInfoPage,
     SubmenuPage,
-    CartPage,
-    AdminPage,
-    AddItemPage
+    RestaurantinfoPage,  
+    CartPage
+
 
   ],
   imports: [
@@ -35,9 +34,9 @@ import { AddItemPage } from '../pages/add-item/add-item';
     HomePage,
     PaymentInfoPage,
     SubmenuPage,
-    CartPage,
-    AdminPage,
-    AddItemPage
+    RestaurantinfoPage,
+    CartPage
+
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })
