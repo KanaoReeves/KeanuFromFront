@@ -42,6 +42,10 @@
     <ion-item-group>
       <ion-item-divider color="light">Total Price</ion-item-divider>
       <ion-item>
+        <ion-label>Delivery - $3 Fee</ion-label>
+        <ion-toggle [(ngModel)]="deliveryTgl" (ionChange)="ChangeMoney()"></ion-toggle>
+      </ion-item>
+      <ion-item>
         <ion-avatar item-left>
           <img src="assets/images/cash_icon.png">
         </ion-avatar>

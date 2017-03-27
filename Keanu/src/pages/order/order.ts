@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, RequestOptions, Headers, } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../home/home';
 import { CartService } from '../../services/cartService';
 import { ItemService } from '../../services/getItem';
+
+// TODO Create Service for Calculating ChangeMoney
+// Create Service for getting cartItems
+// Create Service for creating orderItemsSent
 
 // I only post to the backend once the button is clicked on this page
 @Component({
@@ -14,6 +18,7 @@ import { ItemService } from '../../services/getItem';
 })
 
 export class OrderPage {
+  public deliveryTgl : boolean;
   public cartItems: Array<any>
   public cartItem: { itemId: string, quantity: Number }
   public orderItem: { [key: string]: Number }
@@ -72,7 +77,6 @@ export class OrderPage {
 
     this.storage.get('token').then(value => {
 
-
       this.cartItems.forEach(element => {
         this.orderItem = { [element.itemId]: element.quantity }
         this.orderItemSent.push(this.orderItem);
@@ -80,7 +84,7 @@ export class OrderPage {
 
       let confirmOrder = {
         "date": newdate,
-        "delivery": false,
+        "delivery": this.deliveryTgl,
         "items": this.orderItemSent,
         "price": this.totalPrice.total
       }
@@ -107,6 +111,20 @@ export class OrderPage {
         }
       )
     })
+  }
+
+  public ChangeMoney(){
+    console.log("Hello World")
+    if(this.deliveryTgl.valueOf() == true){
+      this.totalPrice.subTotal += 3;
+      this.totalPrice.tax = Math.round((this.totalPrice.subTotal * .13) * 100) / 100
+      this.totalPrice.total = Math.round((this.totalPrice.subTotal + this.totalPrice.tax) * 100) / 100
+    }
+    else{
+      this.totalPrice.subTotal -= 3;
+      this.totalPrice.tax = Math.round((this.totalPrice.subTotal * .13) * 100) / 100
+      this.totalPrice.total = Math.round((this.totalPrice.subTotal + this.totalPrice.tax) * 100) / 100
+    }
   }
 
   ionViewDidLoad() {
