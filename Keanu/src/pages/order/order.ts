@@ -114,7 +114,6 @@ export class OrderPage {
   }
 
   public ChangeMoney(){
-    console.log("Hello World")
     if(this.deliveryTgl.valueOf() == true){
       this.totalPrice.subTotal += 3;
       this.totalPrice.tax = Math.round((this.totalPrice.subTotal * .13) * 100) / 100
@@ -147,7 +146,6 @@ export class OrderPage {
         this.orderItems.forEach(element => {
           this.totalPrice.subTotal += element.price
           this.totalPrice.subTotal = Math.round(this.totalPrice.subTotal * 100) / 100
-          console.log(this.totalPrice.subTotal)
         });
 
         this.totalPrice.tax = Math.round((this.totalPrice.subTotal * .13) * 100) / 100
