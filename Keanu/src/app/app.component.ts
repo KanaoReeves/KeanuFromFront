@@ -8,8 +8,6 @@ import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { SubmenuPage } from '../pages/submenu/submenu';
 import { CartPage } from '../pages/cart/cart';
-// Just for Testing
-import { OrderPage } from '../pages/order/order';
 
 @Component({
   templateUrl: 'app.html'
@@ -30,8 +28,6 @@ export class MyApp {
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
       { title: 'Cart', component: CartPage },
       { title: 'Login', component: LoginPage },
-      // Just for Testing
-      { title: 'Order', component: OrderPage}
     ];
   }
 
