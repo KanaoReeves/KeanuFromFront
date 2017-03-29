@@ -13,8 +13,8 @@ branches:
   - test/travis
 
 install:
-  - npm cache clean
-  - npm install -g ionic cordova
+  - npm install -g cordova
+  - npm install -g ionic
   - npm install
   - echo y | android update sdk -u --filter android-22,android-23
 
