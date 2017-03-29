@@ -14,7 +14,6 @@ branches:
 
 install:
   - npm cache clean
-  - npm install -g @angular/compiler-cli
   - npm install -g ionic cordova
   - npm install
   - echo y | android update sdk -u --filter android-22,android-23
@@ -24,7 +23,6 @@ before_script:
   - ionic platform add android
 
 script:
-  - ionic prepare
   - ionic build android --release -- --ant
   
 release:
