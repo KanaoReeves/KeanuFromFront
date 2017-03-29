@@ -1,0 +1,30 @@
+language: android
+
+node_js:
+  - 5.5
+
+notifications:
+  email: false
+
+sudo: false
+
+branches:
+  only:
+  - test/travis
+
+install:
+  - npm cache clean
+  - npm install
+  - npm install -g ionic cordova
+  - echo y | android update sdk -u --filter android-22,android-23
+
+before_script:
+  - ionic platform rm android
+  - ionic platform add android
+
+script:
+  - ionic prepare
+  - ionic build android --release -- --ant
+  
+release:
+  - exit 0  
