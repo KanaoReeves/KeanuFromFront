@@ -1,11 +1,9 @@
 
-sudo: false
+sudo: required
 
 language: node_js
 node_js:
   - "7"
-jdk:
-  - oraclejdk8
 addons:
   apt:
     sources:
@@ -24,6 +22,10 @@ install:
   - bower update
 
 before_script:
+  - sudo add-apt-repository ppa:webupd8team/java
+  - sudo apt-get update
+  - sudo apt-get install oracle-java8-installer
+  - sudo apt-get install oracle-java8-set-default
   - wget http://dl.google.com/android/android-sdk_r24.4-linux.tgz
   - tar -xvf android-sdk_r24.4-linux.tgz
   - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter platform-tools
