@@ -1,43 +1,38 @@
-language: android
-node_js:
-- '7'
-jdk:
-  - oraclejdk8
-notifications:
-  email: false
-sudo: required
-branches:
-  only:
-  - test/travis
-install:
-- nvm install node
-- npm install -g npm
-- npm install -g cordova
-- npm install -g ionic
-- npm install
-android:
- components:
- - tools
- - platform-tools
- - build-tools-23.0.0
- - android-23 
- - extra-google-m2repository
- - extra-android-m2repository # for design library
- - addon-google_apis-google-19 # google play services
 
- licenses:
- - android-sdk-preview-license-.+
- - android-sdk-license-.+
- - google-gdk-license-.+
-script:
-- ls -la
-- mkdir www
-- cordova platform add android
-- ionic build android --prod -aot
-- ls -la
-- ls -la platforms/android/build/outputs/apk/
-release:
-- exit 0
+sudo: false
+
+language: node_js
+node_js:
+  - "7"
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+    - openjdk-7-jdk
+    - lib32stdc++6
+    - lib32z1
+env:
+  CXX=g++-4.8
+
+install:
+  - npm install -g gulp bower cordova ionic
+  - npm install
+  - bower update
+
+before_script:
+  - wget http://dl.google.com/android/android-sdk_r24.4-linux.tgz
+  - tar -xvf android-sdk_r24.4-linux.tgz
+  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter platform-tools
+  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter build-tools-23.0.2
+  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter android-23
+  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter extra-android-support
+  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter extra-android-m2repository
+  - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter extra-google-m2repository
+  - export ANDROID_HOME=$PWD/android-sdk-linux
+- export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/23.0.2
 deploy:
   provider: releases
   api_key:
