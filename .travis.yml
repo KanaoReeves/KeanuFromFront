@@ -14,7 +14,7 @@ install:
 
 before_script:
   - sudo apt-get update
-  - echo -ne 'y\n' | sudo apt-get --assume-yes install openjdk-8-jdk
+  - sudo apt-get --assume-yes install openjdk-8-jdk
   - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
   - wget http://dl.google.com/android/android-sdk_r24.4-linux.tgz
   - tar -xvf android-sdk_r24.4-linux.tgz
