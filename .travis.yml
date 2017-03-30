@@ -13,9 +13,7 @@ branches:
   - test/travis
 
 install:
-  - sudo apt-get update -qq
-  - curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
-  - sudo apt-get install -y nodejs
+  - nvm install node
   - npm install -g npm
   - npm install -g cordova
   - npm install -g ionic
