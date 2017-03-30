@@ -13,7 +13,7 @@ branches:
   - test/travis
 
 install:
-  - sudo apt-get -qq update
+  - sudo apt-get install nodejs
   - npm install -g npm
   - npm install -g cordova
   - npm install -g ionic
