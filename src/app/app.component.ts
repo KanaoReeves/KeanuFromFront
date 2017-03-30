@@ -36,8 +36,8 @@ export class MyApp {
     ];
 
     // push admin page if user is an admin
-    this.storage.get('adminRights').then((value: boolean)=>{
-      this.pages.push({ title: 'Admin', component: AdminPage})
+    this.storage.get('adminRights').then((isAdmin: boolean)=>{
+      if(isAdmin){this.pages.push({ title: 'Admin', component: AdminPage})}
     })
 
     // if token is available show login page
