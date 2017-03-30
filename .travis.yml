@@ -16,6 +16,7 @@ install:
 - echo y | android update sdk -u --filter android-22,android-23
 
 script:
+- ls -la
 - cordova platform add android
 - ionic build android --prod -aot
 - ls -la
