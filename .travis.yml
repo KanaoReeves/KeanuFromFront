@@ -18,8 +18,8 @@ before_script:
 - ionic platform rm android
 - ionic platform add android
 script:
-- ls -la
 - ionic build android --prod -aot
+- ls -la
 release:
 - exit 0
 deploy:
