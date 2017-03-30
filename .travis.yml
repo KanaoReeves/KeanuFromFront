@@ -1,31 +1,31 @@
 language: android
-
 node_js:
-  - "7"
-
+- '7'
 notifications:
   email: false
-
 sudo: required
-
 branches:
   only:
   - test/travis
-
 install:
-  - nvm install node
-  - npm install -g npm
-  - npm install -g cordova
-  - npm install -g ionic
-  - npm install
-  - echo y | android update sdk -u --filter android-22,android-23
-
+- nvm install node
+- npm install -g npm
+- npm install -g cordova
+- npm install -g ionic
+- npm install
+- echo y | android update sdk -u --filter android-22,android-23
 before_script:
-  - cordova platform add android
-  - ionic platform add android
-
+- ionic platform rm android
+- ionic platform add android
 script:
-  - ionic build android --release -- --ant
-  
+- ionic build android --release -- --ant
 release:
-  - exit 0
+- exit 0
+deploy:
+  provider: releases
+  api_key:
+    secure: bOzcigW/XWUPGmEJyM2cfe3GGkJyrTr8pQpiyyFkFSAUjb1VEl7T2pvOcOwnooURDXyxI5tk8XRtT+fEYMrESvUUY+OXg69wzkzBfXL184tYGujS222blV/XlYlP1qgErCQ71bLI0KoSYXV9pQ/lT8+DEd7l9n/lRMUaOk0mGOarGzZwYmP9NN0rrQyw2qDxLdw6zdzsskDM6ejIN1Hd5gP0MF8hNGn96zO/V6uFpcl992F5Ir3pcryJ5Ya2Y+OniPNEGKKO8XDeNCF+oo+6tHOzM5JE5cC70tc88cIrQrIjO7sgqo3sgVL0pM8CUTQjWLR0aCe7XEQMj3iGaTtFbIteHGLHVfioqJ9Fo859NR035mQlX63OK7iFMAzQKWWfXViTtoK200d1Rbn4+eyj+S6mboma3e3HctRSEwU0xM9wCUhBWj+wvjuypPOjU+VmO8zlxrXfikN4iOz9OfDnypFuyQG7gXiY5+wx8OJRVza4HVNlEnL4ARNO4uRrx9mxvKleEEDlea/eNThPmyCbCuVK9jzKoyZdSglwQ4Cb5ouOO72XkFg0AVQRtXVAUHbNh87Wum2qTrM0FDveZFvc4qLLxZzGU1A0OYei9Z3Ym4LSb8gOGoicskM4TxcZv9L/Op2ivB1i/BQPPOu58gd3FYSvg0ljDePVlDxyvrfawoU=
+  file: "./platforms/android/build/outputs/apk/android-debug.apk"
+  on:
+    repo: KanaoReeves/KeanuFromFront
+    branch: test/travis
