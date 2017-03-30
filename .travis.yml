@@ -13,7 +13,7 @@ install:
   - bower update
 
 before_script:
-  - sudo add-apt-repository ppa:webupd8team/java
+  - sudo add-apt-repository ppa:webupd8team/java -y
   - sudo apt-get update
   - echo -ne 'y\n' | sudo apt-get --assume-yes install oracle-java8-installer
   - echo -ne 'y\n' | sudo apt-get --assume-yes install oracle-java8-set-default
