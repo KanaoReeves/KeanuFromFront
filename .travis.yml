@@ -4,7 +4,8 @@ sudo: false
 language: node_js
 node_js:
   - "7"
-
+jdk:
+  - oraclejdk8
 addons:
   apt:
     sources:
