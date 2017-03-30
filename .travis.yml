@@ -20,8 +20,7 @@ android:
  - tools
  - platform-tools
  - build-tools-23.0.0
- - android-23
- - android-23
+ - android-23 
  - extra-google-m2repository
  - extra-android-m2repository # for design library
  - addon-google_apis-google-19 # google play services
