@@ -1,6 +1,8 @@
 language: android
 node_js:
 - '7'
+jdk:
+  - oraclejdk8
 notifications:
   email: false
 sudo: required
