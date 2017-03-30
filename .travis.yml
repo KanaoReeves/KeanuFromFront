@@ -15,8 +15,8 @@ install:
 before_script:
   - echo -ne 'y\n' | sudo add-apt-repository ppa:webupd8team/java -y
   - sudo apt-get update
-  - echo -ne 'y\n' | sudo apt-get --assume-yes install oracle-java8-installer
-  - echo -ne 'y\n' | sudo apt-get --assume-yes install oracle-java8-set-default
+  - echo -ne 'y\n' | sudo apt-get --assume-yes install install openjdk-8-jdk
+  - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
   - wget http://dl.google.com/android/android-sdk_r24.4-linux.tgz
   - tar -xvf android-sdk_r24.4-linux.tgz
   - echo y | ./android-sdk-linux/tools/android update sdk --no-ui --all --filter platform-tools
