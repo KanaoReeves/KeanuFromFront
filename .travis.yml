@@ -15,8 +15,12 @@ install:
 - npm install -g cordova
 - npm install -g ionic
 - npm install
-- echo y | android update sdk -u --filter android-22,android-23
-
+- echo y | android update sdk -u --filter android-23,android-25
+android:
+  licenses:
+  - 'android-sdk-preview-license-52d11cd2'
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
 script:
 - ls -la
 - mkdir www
