@@ -21,6 +21,7 @@ script:
 - cordova platform add android
 - ionic build android --prod -aot
 - ls -la
+- ls -la ./platforms/android/build/outputs/apk/
 release:
 - exit 0
 deploy:
