@@ -13,7 +13,8 @@ branches:
   - test/travis
 
 install:
-  - npm install -g NODE
+  - npm install -g n
+  - n stable
   - npm install -g npm
   - npm install -g cordova
   - npm install -g ionic
