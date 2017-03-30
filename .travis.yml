@@ -13,12 +13,12 @@ branches:
   - test/travis
 
 install:
-  - sudo npm install -g n
+  - npm install -g n
   - sudo n stable
-  - sudo npm install -g npm
-  - sudo npm install -g cordova
-  - sudo npm install -g ionic
-  - sudo npm install
+  - npm install -g npm
+  - npm install -g cordova
+  - npm install -g ionic
+  - npm install
   - echo y | android update sdk -u --filter android-22,android-23
 
 before_script:
