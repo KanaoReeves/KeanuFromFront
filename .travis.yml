@@ -6,7 +6,7 @@ node_js:
 notifications:
   email: false
 
-sudo: true
+sudo: required
 
 branches:
   only:
