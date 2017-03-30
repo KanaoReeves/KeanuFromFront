@@ -21,7 +21,7 @@ install:
   - echo y | android update sdk -u --filter android-22,android-23
 
 before_script:
-  - ionic platform rm android
+  - cordova platform add android
   - ionic platform add android
 
 script:
