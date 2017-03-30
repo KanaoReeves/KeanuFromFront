@@ -17,15 +17,20 @@ install:
 - npm install
 - echo y | android update sdk -u --filter android-23
 android:
-components:
-  # Uncomment the lines below if you want to
-  # use the latest revision of Android SDK Tools
-  # - platform-tools
-  # - tools
+ components:
+ - tools
+ - platform-tools
+ - build-tools-23.0.0
+ - android-23
+ - android-23
+ - extra-google-m2repository
+ - extra-android-m2repository # for design library
+ - addon-google_apis-google-19 # google play services
 
-  # The BuildTools version used by your project
-  - build-tools-23.0.0
-  - extra-google-m2repository
+ licenses:
+ - android-sdk-preview-license-.+
+ - android-sdk-license-.+
+ - google-gdk-license-.+
 script:
 - ls -la
 - mkdir www
