@@ -14,7 +14,7 @@ branches:
 
 install:
   - npm install -g n
-  - n stable
+  - sudo n stable
   - npm install -g npm
   - npm install -g cordova
   - npm install -g ionic
