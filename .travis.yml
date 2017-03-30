@@ -17,6 +17,7 @@ install:
 
 script:
 - ls -la
+- mkdir www
 - cordova platform add android
 - ionic build android --prod -aot
 - ls -la
