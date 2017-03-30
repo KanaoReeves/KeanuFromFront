@@ -15,7 +15,7 @@ install:
 - npm install -g cordova
 - npm install -g ionic
 - npm install
-- echo y | android update sdk -u --filter android-23,android-25
+- echo y | android update sdk -u --filter android-23
 android:
 components:
   # Uncomment the lines below if you want to
@@ -24,7 +24,7 @@ components:
   # - tools
 
   # The BuildTools version used by your project
-  - build-tools-22.0.0
+  - build-tools-23.0.0
   - extra-google-m2repository
 script:
 - ls -la
