@@ -14,10 +14,9 @@ install:
 - npm install -g ionic
 - npm install
 - echo y | android update sdk -u --filter android-22,android-23
-before_script:
-- ionic platform rm android
-- ionic platform add android
+
 script:
+- ionic platform add android
 - ionic build android --prod -aot
 - ls -la
 release:
