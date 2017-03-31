@@ -62,10 +62,12 @@ export class MyApp {
     });
   }
 
+
   openPage(page) {
     if (page.title == "Logout") {
       alert("You have successfully logged out")
-      this.storage.remove('token')
+      this.storage.remove('token');
+      this.storage.remove('cartItem');
       this.pages.pop();
       this.pages.push({ title: 'Login', component: LoginPage })
       this.nav.setRoot(HomePage);
