@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { CartService } from '../../services/cartService';
 import { OrderPage } from '../order/order'
+import { Observable } from "rxjs/Observable";
 /*
   Generated class for the Cart page.
 
@@ -16,6 +17,7 @@ import { OrderPage } from '../order/order'
   providers: [CartService]
 })
 export class CartPage {
+  public cartItemsIncrease: Map<String, number>;
   public cartItems: Array<Object>
   public delivery: boolean;
   
@@ -25,6 +27,7 @@ export class CartPage {
     public http: Http,
     private storage: Storage,
     private cartService: CartService) {
+      this.cartItemsIncrease = new Map<String, number>();
       this.cartItems=new Array<Object>();
       this.delivery = false;
     }
@@ -32,6 +35,16 @@ export class CartPage {
   public GoOrderPage(){
     
     this.navCtrl.push(OrderPage);
+  }
+  
+  public IncreaseQuantity(itemId: String): void{
+    console.log('itemID is : ' + itemId);
+
+    this.cartService.IncreaseQuantity({ 'id': itemId, 'quantity': 1 })
+  }
+
+  public DecreaseQuantity(){
+    this.cartService.deleteFromCart
   }
 
   ionViewDidLoad() {
