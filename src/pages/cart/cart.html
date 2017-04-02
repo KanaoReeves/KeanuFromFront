@@ -21,7 +21,14 @@
       <ion-card-title class="center">{{cartItem.item.data.item.name}}</ion-card-title>
       <img src="{{cartItem.item.data.item.imageURL}}">
       <p class="center">{{cartItem.item.data.item.description}}</p>
-      <p>{{cartItem.quantity}} items</p>
+      <p>
+        <button ion-button (click)="DecreaseQuantity()" color="light" icon-only>
+        <ion-icon name='arrow-down'></ion-icon>
+        </button>{{cartItem.quantity}} items
+        <button ion-button (click)="IncreaseQuantity()" color="light" icon-only>
+        <ion-icon name='arrow-up'></ion-icon>
+        </button>
+      </p>
       <button class="submenu-BtnCart">
       <p class="submenu-Price"><strong>$ {{cartItem.item.data.item.price}}</strong></p>
       </button>
