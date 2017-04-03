@@ -22,7 +22,6 @@ export class MenuCallService {
                 }
             );
         })
-
         //console.log("From GetMenu.ts " + this.menuItems);
     }
 }

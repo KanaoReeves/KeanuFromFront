@@ -99,46 +99,40 @@ export class CartService {
 
 
 	}
-	public increaseQuantity(cartItem: Object) {
+	public increaseQuantity(cartItem: any) {
 		this.storage.get(this._cartName).then(value => {
 			//if null sets a new Map
 			this.cartItems = this._nullCheck(value)
 			// if an item is already in the cart
-			// then increment the quantity
+			// then increment the quantity	
+			let currentQuantity = 1;
 
-			// OMIDS CODE
-			
-			console.log(cartItem);
-
-
-
-			let currentQuantity = 1
-			if (this.cartItems.has(cartItem['id'])) {
-				currentQuantity = this.cartItems.get(cartItem['id'])
-				currentQuantity++;
+			if (this.cartItems.has(cartItem.item._id)){
+				currentQuantity = this.cartItems.get(cartItem.item._id);
+				currentQuantity++;	
 			}
 			// set the cart
-
-			this.cartItems.set(cartItem['id'], currentQuantity)
-
+			this.cartItems.set(cartItem.item._id, currentQuantity)
 
 			// store the cart
 			this.storage.set(this._cartName, this.cartItems)
 		})
 	}
-	public decreaseQuantity(cartItem: Object) {
+	public decreaseQuantity(cartItem: any) {
 		this.storage.get(this._cartName).then(value => {
 			//if null sets a new Map
 			this.cartItems = this._nullCheck(value)
 			// if an item is already in the cart
-			// then increment the quantity
-			let currentQuantity = 1
-			if (this.cartItems.has(cartItem['id'])) {
-				currentQuantity = this.cartItems.get(cartItem['id'])
-				currentQuantity = currentQuantity - 1;
+			// then increment the quantity	
+			let currentQuantity = 1;
+
+			if (this.cartItems.has(cartItem.item._id)){
+				currentQuantity = this.cartItems.get(cartItem.item._id);
+				currentQuantity--;	
 			}
 			// set the cart
-			this.cartItems.set(cartItem['id'], currentQuantity)
+			this.cartItems.set(cartItem.item._id, currentQuantity)
+
 			// store the cart
 			this.storage.set(this._cartName, this.cartItems)
 		})

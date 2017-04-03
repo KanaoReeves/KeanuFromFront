@@ -20,43 +20,47 @@ export class CartPage {
   public cartItemsIncrease: Map<String, number>;
   public cartItems: Array<Object>
   public delivery: boolean;
-  
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public http: Http,
     private storage: Storage,
     private cartService: CartService) {
-      this.cartItemsIncrease = new Map<String, number>();
-      this.cartItems = new Array<Object>();
-      this.delivery = false;
-    }
+    this.cartItemsIncrease = new Map<String, number>();
+    this.cartItems = new Array<Object>();
+    this.delivery = false;
+  }
 
-  public GoOrderPage(){
-    
+  public GoOrderPage() {
+
     this.navCtrl.push(OrderPage);
   }
 
-  public IncreaseQuantity(cartItem : Object): void{
+  public IncreaseQuantity(cartItem: Object): void {
     //console.log(cartItem);
 
     this.cartService.increaseQuantity(cartItem);
+    this.cartService.getCartItems().then(itemsData => {
+      this.cartItems = itemsData;
+    })
   }
 
-  public DecreaseQuantity(cartItem : Object){
+  public DecreaseQuantity(cartItem: Object) {
     //console.log(cartItem);
-
+    
     this.cartService.decreaseQuantity(cartItem);
+    this.cartService.getCartItems().then(itemsData => {
+      this.cartItems = itemsData;
+    })
   }
 
   ionViewDidLoad() {
 
     console.log('in cart loading');
-    
-    this.cartService.getCartItems().then(itemsData =>{
-      
-      this.cartItems = itemsData;    
-      console.log(itemsData);
+
+    this.cartService.getCartItems().then(itemsData => {
+      this.cartItems = itemsData;
     })
   }
 }
