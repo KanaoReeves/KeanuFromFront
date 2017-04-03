@@ -32,6 +32,17 @@ export class SubmenuPage {
 
     })
   }
+
+  // Edit Items Event
+
+public editItemClick(item): void {
+
+let loader: Loading = this.loadingCtrl.create({content: 'loading item to edit'})
+
+//this.navCtrl.push(this.SubMenuPage, { data: menuItems }).then(() => loading.dismiss())
+
+}
+  // Delete Button Event - neil
   public deleteClick(id: String): void {
     let link = 'https://keanubackend.herokuapp.com/admin/item/delete/' + id;
     let loader: Loading = this.loadingCtrl.create({content: 'Deleting item'})
