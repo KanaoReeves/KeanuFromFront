@@ -18,19 +18,19 @@
 <ion-content padding>
   <ion-card *ngFor="let cartItem of cartItems">
     <ion-card-content>
-      <ion-card-title class="center">{{cartItem.item.data.item.name}}</ion-card-title>
-      <img src="{{cartItem.item.data.item.imageURL}}">
-      <p class="center">{{cartItem.item.data.item.description}}</p>
+      <ion-card-title class="center">{{cartItem.item.name}}</ion-card-title>
+      <img src="{{cartItem.item.imageURL}}">
+      <p class="center">{{cartItem.item.description}}</p>
       <p>
-        <button ion-button (click)="DecreaseQuantity()" color="light" icon-only>
+        <button ion-button (click)="DecreaseQuantity(cartItem)" color="light" icon-only>
         <ion-icon name='arrow-down'></ion-icon>
-        </button>{{cartItem.quantity}} items
-        <button ion-button (click)="IncreaseQuantity()" color="light" icon-only>
+        </button>{{cartItem.quantity}}
+        <button ion-button (click)="IncreaseQuantity(cartItem)" color="light" icon-only>
         <ion-icon name='arrow-up'></ion-icon>
         </button>
       </p>
       <button class="submenu-BtnCart">
-      <p class="submenu-Price"><strong>$ {{cartItem.item.data.item.price}}</strong></p>
+      <p class="submenu-Price"><strong>$ {{cartItem.item.price}}</strong></p>
       </button>
     </ion-card-content>
   </ion-card>

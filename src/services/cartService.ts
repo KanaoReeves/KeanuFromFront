@@ -82,7 +82,7 @@ export class CartService {
 							index++;
 
 							cartItemsData.push({
-								'item': data,
+								'item': data.data.item,
 								'quantity': quantity
 							})
 						},
@@ -99,25 +99,35 @@ export class CartService {
 
 
 	}
-	public increaseQuantity(cartItem: Object){
-    	this.storage.get(this._cartName).then(value => {
+	public increaseQuantity(cartItem: Object) {
+		this.storage.get(this._cartName).then(value => {
 			//if null sets a new Map
 			this.cartItems = this._nullCheck(value)
 			// if an item is already in the cart
 			// then increment the quantity
+
+			// OMIDS CODE
+			
+			console.log(cartItem);
+
+
+
 			let currentQuantity = 1
 			if (this.cartItems.has(cartItem['id'])) {
 				currentQuantity = this.cartItems.get(cartItem['id'])
 				currentQuantity++;
 			}
 			// set the cart
+
 			this.cartItems.set(cartItem['id'], currentQuantity)
+
+
 			// store the cart
 			this.storage.set(this._cartName, this.cartItems)
 		})
 	}
-		public decreaseQuantity(cartItem: Object){
-    	this.storage.get(this._cartName).then(value => {
+	public decreaseQuantity(cartItem: Object) {
+		this.storage.get(this._cartName).then(value => {
 			//if null sets a new Map
 			this.cartItems = this._nullCheck(value)
 			// if an item is already in the cart
@@ -148,7 +158,7 @@ export class CartService {
 		return new Promise<Array<Object>>((resolve, reject) => {
 			this.storage.get(this._cartName).then((cart: Map<String, number>) => {
 				let cartObject = new Array<Object>();
-				cart.forEach((value:number, key:string)=>{
+				cart.forEach((value: number, key: string) => {
 					cartObject.push({
 						'itemId': key,
 						'quantity': value
@@ -165,6 +175,6 @@ export class CartService {
 	private _nullCheck(value) {
 		return value == null ? new Map<String, number>() : value;
 	}
-	
+
 }
 

@@ -28,7 +28,7 @@ export class CartPage {
     private storage: Storage,
     private cartService: CartService) {
       this.cartItemsIncrease = new Map<String, number>();
-      this.cartItems=new Array<Object>();
+      this.cartItems = new Array<Object>();
       this.delivery = false;
     }
 
@@ -37,14 +37,16 @@ export class CartPage {
     this.navCtrl.push(OrderPage);
   }
 
-  public IncreaseQuantity(itemId: String): void{
-    console.log('itemID is : ' + itemId);
+  public IncreaseQuantity(cartItem : Object): void{
+    //console.log(cartItem);
 
-    this.cartService.increaseQuantity({ 'id': itemId, 'quantity': 1 })
+    this.cartService.increaseQuantity(cartItem);
   }
 
-  public DecreaseQuantity(itemId: String){
-     this.cartService.increaseQuantity({ 'id': itemId, 'quantity': 1 })
+  public DecreaseQuantity(cartItem : Object){
+    //console.log(cartItem);
+
+    this.cartService.decreaseQuantity(cartItem);
   }
 
   ionViewDidLoad() {
@@ -52,8 +54,9 @@ export class CartPage {
     console.log('in cart loading');
     
     this.cartService.getCartItems().then(itemsData =>{
-      this.cartItems = itemsData;     
-      console.log(itemsData)
+      
+      this.cartItems = itemsData;    
+      console.log(itemsData);
     })
   }
 }
