@@ -36,15 +36,15 @@ export class CartPage {
     
     this.navCtrl.push(OrderPage);
   }
-  
+
   public IncreaseQuantity(itemId: String): void{
     console.log('itemID is : ' + itemId);
 
-    this.cartService.IncreaseQuantity({ 'id': itemId, 'quantity': 1 })
+    this.cartService.increaseQuantity({ 'id': itemId, 'quantity': 1 })
   }
 
-  public DecreaseQuantity(){
-    this.cartService.deleteFromCart
+  public DecreaseQuantity(itemId: String){
+     this.cartService.increaseQuantity({ 'id': itemId, 'quantity': 1 })
   }
 
   ionViewDidLoad() {
