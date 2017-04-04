@@ -1,22 +1,34 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Http } from '@angular/http';
 
-/*
-  Generated class for the Search page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html'
 })
 export class SearchPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  private _searchUrl:string;
+  
+  public results: Array<Object>;
 
-  ionViewDidLoad() {
+  constructor(private http:Http) {
+    this._searchUrl = 'https://keanubackend.herokuapp.com/item/search?q=';
+
+    this.results = new Array<Object>();
+  }
+
+  public ionViewDidLoad():void {
     console.log('ionViewDidLoad SearchPage');
+  }
+
+  public getItems(event):void{
+    let query = event.target.value
+    this.http.get(this._searchUrl + query).map(res => res.json()['data']['items']).subscribe(
+      data => {console.log(data); this.results=data}
+      
+    )
+
   }
 
 }

@@ -7,12 +7,25 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>search</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Search</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list>
+    <button text-wrap ion-item *ngFor="let result of results">
+      <ion-avatar item-left>
+        <img src="{{result.imageURL}}">
+      </ion-avatar>
+      <h1>{{ result.name }}</h1>
+      <h2>{{ result.category }}</h2>
+      <p>{{result.description}}</p>
+    </button>
+  </ion-list>
 </ion-content>

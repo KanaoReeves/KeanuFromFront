@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 
@@ -10,11 +10,13 @@ import { SubmenuPage } from '../pages/submenu/submenu';
 import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 import { AdminPage } from '../pages/admin/admin';
 import { CartPage } from '../pages/cart/cart';
+import { SearchPage } from '../pages/search/search';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+
   @ViewChild(Nav) nav: Nav;
 
   // Setting the root page to HomePage
@@ -22,22 +24,26 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform,
-    public storage: Storage) {
+  constructor(
+    public events: Events,
+    public platform: Platform,
+    public storage: Storage
+  ) {
     this.initializeApp();
 
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
-      //Restaurant infomation page
+
       { title: 'Restaurant Info', component: RestaurantinfoPage },
-      // If Token exists, show logout
-      { title: 'Cart', component: CartPage },
+
+      { title: 'Search', component: SearchPage }
+
     ];
 
     // push admin page if user is an admin
-    this.storage.get('adminRights').then((isAdmin: boolean)=>{
-      if(isAdmin){this.pages.push({ title: 'Admin', component: AdminPage})}
+    this.storage.get('adminRights').then((isAdmin: boolean) => {
+      if (isAdmin) { this.pages.push({ title: 'Admin', component: AdminPage }) }
     })
 
     // if token is available show login page
@@ -74,7 +80,7 @@ export class MyApp {
     }
 
     this.storage.get('token').then((value: string) => {
-      if(value != "" && value != null){
+      if (value != "" && value != null) {
         this.pages.pop();
         this.pages.push({ title: 'Logout', component: LoginPage })
       }
