@@ -4,12 +4,7 @@ import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { CartService } from '../../services/cartService';
 import { OrderPage } from '../order/order'
-/*
-  Generated class for the Cart page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-cart',
   templateUrl: 'cart.html',
