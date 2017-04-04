@@ -16,25 +16,6 @@
 
 
 <ion-content>
-  <!--<ion-card *ngFor="let cartItem of cartItems">
-    <ion-card-content>
-      <ion-card-title class="center">{{cartItem.item.name}}</ion-card-title>
-      <img src="{{cartItem.item.imageURL}}">
-      <p class="center">{{cartItem.item.description}}</p>
-      <p>
-        <button ion-button (click)="DecreaseQuantity(cartItem)" color="light" icon-only>
-        <ion-icon name='arrow-down'></ion-icon>
-        </button>{{cartItem.quantity}}
-        <button ion-button (click)="IncreaseQuantity(cartItem)" color="light" icon-only>
-        <ion-icon name='arrow-up'></ion-icon>
-        </button>
-      </p>
-      <button class="submenu-BtnCart">
-      <p class="submenu-Price"><strong>$ {{cartItem.item.price}}</strong></p>
-      </button>
-    </ion-card-content>
-  </ion-card>-->
-
   <ion-list>
     <ion-item *ngFor="let cartItem of cartItems">
       <ion-thumbnail item-left>
@@ -53,6 +34,14 @@
     </ion-item>
   </ion-list>
 
-  <ion-content padding>
+  
+
+  <div padding *ngIf="token != null">
     <button ion-button block large (click)="GoOrderPage()">Checkout Cart</button>
-  </ion-content>
+  </div>
+
+  <div padding *ngIf="token == null">
+    <button ion-button block large>Login to Checkout</button>
+  </div>
+
+</ion-content>

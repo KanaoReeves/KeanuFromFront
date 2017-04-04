@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { CartService } from '../../services/cartService';
 import { OrderPage } from '../order/order'
 import { Observable } from "rxjs/Observable";
+
 /*
   Generated class for the Cart page.
 
@@ -20,6 +21,7 @@ export class CartPage {
   public cartItemsIncrease: Map<String, number>;
   public cartItems: Array<Object>
   public delivery: boolean;
+  public token: String;
 
   constructor(
     public navCtrl: NavController,
@@ -41,6 +43,8 @@ export class CartPage {
     //console.log(cartItem);
 
     this.cartService.increaseQuantity(cartItem);
+
+
     this.cartService.getCartItems().then(itemsData => {
       this.cartItems = itemsData;
     })
@@ -50,6 +54,8 @@ export class CartPage {
     //console.log(cartItem);
     
     this.cartService.decreaseQuantity(cartItem);
+
+
     this.cartService.getCartItems().then(itemsData => {
       this.cartItems = itemsData;
     })
@@ -61,6 +67,9 @@ export class CartPage {
 
     this.cartService.getCartItems().then(itemsData => {
       this.cartItems = itemsData;
+    })
+    this.storage.get('token').then((value: string) => {
+      this.token = value; 
     })
   }
 }
