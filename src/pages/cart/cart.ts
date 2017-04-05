@@ -1,17 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Alert } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { CartService } from '../../services/cartService';
 import { OrderPage } from '../order/order'
-import { Observable } from "rxjs/Observable";
 
-/*
-  Generated class for the Cart page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-cart',
   templateUrl: 'cart.html',
@@ -28,7 +21,9 @@ export class CartPage {
     public navParams: NavParams,
     public http: Http,
     private storage: Storage,
-    private cartService: CartService) {
+    private cartService: CartService,
+    private alertController: AlertController
+  ) {
     this.cartItemsIncrease = new Map<String, number>();
     this.cartItems = new Array<Object>();
     this.delivery = false;
@@ -53,9 +48,6 @@ export class CartPage {
   }
 
   public DecreaseQuantity(cartItem: Object) {
-    //console.log(cartItem);
-    console.log(cartItem);
-
     this.cartService.decreaseQuantity(cartItem).then(value => {
       if (value) {
         this.cartService.getCartItems().then(itemsData => {
@@ -64,6 +56,42 @@ export class CartPage {
       }
     });
 
+
+  }
+
+  /**
+   * DeleteItem
+   */
+  public DeleteItem(cartItem: Object) {
+
+    let delFunction = () => {
+      this.cartService.deleteFromCart(cartItem['item']['_id']).then(value => {
+        if (value) {
+          this.cartService.getCartItems().then(itemsData => {
+            this.cartItems = itemsData;
+          });
+        }
+        else {
+          this.cartItems = [];
+        }
+      });
+    }
+
+    let confirm: Alert = this.alertController.create({
+      title: 'Remove item',
+      message: 'Remove ' + cartItem['item']['name'] + ' from cart?',
+      buttons: [
+        {
+          text: 'No'
+        },
+        {
+          text: 'Yes',
+          handler: delFunction
+        }
+      ]
+    });
+
+    confirm.present();
 
   }
 

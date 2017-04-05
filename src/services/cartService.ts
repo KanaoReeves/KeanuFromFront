@@ -53,11 +53,28 @@ export class CartService {
 	 * 
 	 * @memberOf CartService
 	 */
-	public deleteFromCart(itemID: string) {
-		this.storage.get(this._cartName).then((cart: Map<String, number>) => {
-			cart.delete(itemID)
-			this.storage.set(this._cartName, cart)
+	public deleteFromCart(itemID: string):Promise<boolean> {
+		return new Promise<boolean>((resolve, reject) => {
+			this.storage.get(this._cartName).then((cart: Map<String, number>) => {
+				cart.delete(itemID)
+				console.log('cart: ');
+				
+				console.log(cart.size);
+				
+				this.storage.set(this._cartName, cart).then(()=>{
+					if (cart.size ==0 ) {
+						resolve(false);
+					}
+					else{
+						resolve(true);
+					}
+
+				}).catch(()=>{
+					reject(false);
+				})
+			})
 		})
+
 	}
 
 	/**
@@ -155,7 +172,7 @@ export class CartService {
 				// store the cart
 				this.storage.set(this._cartName, this.cartItems).then(() => {
 					resolve(true);
-				}).catch(()=>{
+				}).catch(() => {
 					reject(false);
 				});
 			});
