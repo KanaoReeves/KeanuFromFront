@@ -38,7 +38,9 @@
     </ion-item>
   </ion-list>
 
-  
+  <div *ngIf="cartItems.length ===0">
+    <h1 text-center>No items in cart</h1>
+  </div>
 
   <div padding *ngIf="token != null && cartItems.length !==0">
     <button ion-button block large (click)="GoOrderPage()">Checkout Cart</button>
