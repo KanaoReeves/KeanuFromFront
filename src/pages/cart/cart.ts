@@ -41,24 +41,30 @@ export class CartPage {
 
   public IncreaseQuantity(cartItem: Object): void {
     //console.log(cartItem);
+    console.log(cartItem);
+    this.cartService.increaseQuantity(cartItem).then(value => {
+      if (value) {
+        this.cartService.getCartItems().then(itemsData => {
+          this.cartItems = itemsData;
+        });
+      }
+    });
 
-    this.cartService.increaseQuantity(cartItem);
-
-
-    this.cartService.getCartItems().then(itemsData => {
-      this.cartItems = itemsData;
-    })
   }
 
   public DecreaseQuantity(cartItem: Object) {
     //console.log(cartItem);
-    
-    this.cartService.decreaseQuantity(cartItem);
+    console.log(cartItem);
+
+    this.cartService.decreaseQuantity(cartItem).then(value => {
+      if (value) {
+        this.cartService.getCartItems().then(itemsData => {
+          this.cartItems = itemsData;
+        })
+      }
+    });
 
 
-    this.cartService.getCartItems().then(itemsData => {
-      this.cartItems = itemsData;
-    })
   }
 
   ionViewDidLoad() {
@@ -69,7 +75,7 @@ export class CartPage {
       this.cartItems = itemsData;
     })
     this.storage.get('token').then((value: string) => {
-      this.token = value; 
+      this.token = value;
     })
   }
 }

@@ -89,6 +89,7 @@ export class CartService {
 						err => console.log(err),
 						() => {
 							if (index == this.cartItems.size) {
+								cartItemsData.sort((a, b) => { return a['item']['_id'].localeCompare(b['item']['_id']) });
 								resolve(cartItemsData)
 							}
 						}
@@ -99,43 +100,66 @@ export class CartService {
 
 
 	}
-	public increaseQuantity(cartItem: any) {
-		this.storage.get(this._cartName).then(value => {
-			//if null sets a new Map
-			this.cartItems = this._nullCheck(value)
-			// if an item is already in the cart
-			// then increment the quantity	
-			let currentQuantity = 1;
 
-			if (this.cartItems.has(cartItem.item._id)){
-				currentQuantity = this.cartItems.get(cartItem.item._id);
-				currentQuantity++;	
-			}
-			// set the cart
-			this.cartItems.set(cartItem.item._id, currentQuantity)
+	/**
+	 * Increase Quantity of cart
+	 * @param cartItem object
+	 */
+	public increaseQuantity(cartItem: any): Promise<boolean> {
+		return new Promise<boolean>((resolve, reject) => {
 
-			// store the cart
-			this.storage.set(this._cartName, this.cartItems)
-		})
+			this.storage.get(this._cartName).then(value => {
+				//if null sets a new Map
+				this.cartItems = this._nullCheck(value)
+				// if an item is already in the cart
+				// then increment the quantity	
+				let currentQuantity = 1;
+
+				if (this.cartItems.has(cartItem.item._id)) {
+					currentQuantity = this.cartItems.get(cartItem.item._id);
+					currentQuantity++;
+				}
+				// set the cart
+				this.cartItems.set(cartItem.item._id, currentQuantity)
+
+				// store the cart
+				this.storage.set(this._cartName, this.cartItems).then(() => {
+					resolve(true)
+				}).catch(() => {
+					reject(false)
+				});
+			})
+		});
 	}
-	public decreaseQuantity(cartItem: any) {
-		this.storage.get(this._cartName).then(value => {
-			//if null sets a new Map
-			this.cartItems = this._nullCheck(value)
-			// if an item is already in the cart
-			// then increment the quantity	
-			let currentQuantity = 1;
 
-			if (this.cartItems.has(cartItem.item._id)){
-				currentQuantity = this.cartItems.get(cartItem.item._id);
-				currentQuantity--;	
-			}
-			// set the cart
-			this.cartItems.set(cartItem.item._id, currentQuantity)
+	/**
+	 * Decrease Quantity
+	 * @param cartItem object
+	 */
+	public decreaseQuantity(cartItem: any): Promise<boolean> {
+		return new Promise<boolean>((resolve, reject) => {
+			this.storage.get(this._cartName).then(value => {
+				//if null sets a new Map
+				this.cartItems = this._nullCheck(value)
+				// if an item is already in the cart
+				// then increment the quantity	
+				let currentQuantity = 1;
 
-			// store the cart
-			this.storage.set(this._cartName, this.cartItems)
-		})
+				if (this.cartItems.has(cartItem.item._id)) {
+					currentQuantity = this.cartItems.get(cartItem.item._id);
+					currentQuantity--;
+				}
+				// set the cart
+				this.cartItems.set(cartItem.item._id, currentQuantity)
+
+				// store the cart
+				this.storage.set(this._cartName, this.cartItems).then(() => {
+					resolve(true);
+				}).catch(()=>{
+					reject(false);
+				});
+			});
+		});
 	}
 
 	/**
