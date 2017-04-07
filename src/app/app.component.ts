@@ -10,6 +10,7 @@ import { SubmenuPage } from '../pages/submenu/submenu';
 import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 import { AdminPage } from '../pages/admin/admin';
 import { CartPage } from '../pages/cart/cart';
+import { ProfilePage } from '../pages/profile/profile';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,6 +30,7 @@ export class MyApp {
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
+      { title: 'Profile', component: ProfilePage },
       //Restaurant infomation page
       { title: 'Restaurant Info', component: RestaurantinfoPage },
       // If Token exists, show logout
