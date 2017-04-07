@@ -15,19 +15,39 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-card *ngFor="let cartItem of cartItems">
-    <ion-card-content>
-      <ion-card-title class="center">{{cartItem.item.data.item.name}}</ion-card-title>
-      <img src="{{cartItem.item.data.item.imageURL}}">
-      <p class="center">{{cartItem.item.data.item.description}}</p>
-      <p>{{cartItem.quantity}} items</p>
-      <button class="submenu-BtnCart">
-      <p class="submenu-Price"><strong>$ {{cartItem.item.data.item.price}}</strong></p>
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let cartItem of cartItems">
+      <ion-thumbnail item-left>
+        <img src="{{cartItem.item.imageURL}}">
+      </ion-thumbnail>
+      <h2>{{cartItem.item.name}}</h2>
+      <p>${{cartItem.item.price}}</p>
+      <p text-wrap>{{cartItem.item.description}}</p>
+      <p>Quantity : {{cartItem.quantity}}</p>
+      <button class="controls" ion-button (click)="DecreaseQuantity(cartItem)">
+        <ion-icon name="arrow-down"></ion-icon>
       </button>
-    </ion-card-content>
-  </ion-card>
-  <ion-content>
-    <button ion-button block medium (click)="GoOrderPage()">Checkout Cart</button>
-  </ion-content>
+      <button class="controls" ion-button (click)="IncreaseQuantity(cartItem)">
+        <ion-icon name="arrow-up"></ion-icon>
+      </button>
+      <button class="controls" ion-button color="danger" (click)="DeleteItem(cartItem)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="cartItems.length ===0">
+    <h1 text-center>No items in cart</h1>
+  </div>
+
+  <div padding *ngIf="token != null && cartItems.length !==0">
+    <button ion-button block large (click)="GoOrderPage()">Checkout Cart</button>
+  </div>
+
+  <div padding *ngIf="token == null && cartItems.length !==0">
+    <button ion-button block large>Login to Checkout</button>
+  </div>
+
 </ion-content>
