@@ -42,11 +42,11 @@
     </ion-item>
 
     <ion-item>
-      <ion-label fixed>Pain</ion-label>
+      <ion-label fixed>Price</ion-label>
       <ion-input type="text" [(ngModel)]="item.price"></ion-input>
     </ion-item>
 
   </ion-list>
-
+  <button ion-button color="secondary" full (click)="editItemClick()">Accept Changes</button>
 
 </ion-content>
