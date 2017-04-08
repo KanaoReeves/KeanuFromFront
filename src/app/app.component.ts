@@ -11,6 +11,7 @@ import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 import { AdminPage } from '../pages/admin/admin';
 import { CartPage } from '../pages/cart/cart';
 
+
 @Component({
   templateUrl: 'app.html'
 })
