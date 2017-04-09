@@ -8,26 +8,49 @@ import { Http } from '@angular/http';
 })
 export class SearchPage {
 
-  private _searchUrl:string;
-  
+  private _searchUrl: string;
   public results: Array<Object>;
 
-  constructor(private http:Http) {
+  constructor(private http: Http) {
     this._searchUrl = 'https://keanubackend.herokuapp.com/item/search?q=';
-
     this.results = new Array<Object>();
   }
 
-  public ionViewDidLoad():void {
+  /**
+   * load page function
+   */
+  public ionViewDidLoad(): void {
     console.log('ionViewDidLoad SearchPage');
   }
 
-  public getItems(event):void{
+  /**
+   * get items 
+   * @param event 
+   */
+  public getItems(event): void {
     let query = event.target.value
-    this.http.get(this._searchUrl + query).map(res => res.json()['data']['items']).subscribe(
-      data => {console.log(data); this.results=data}
-      
-    )
+
+    if (query !== '') {
+
+      this.http.get(this._searchUrl + query).map(res => res.json()).subscribe(
+        data => {
+          if (typeof data['data']['items'] !== 'undefined') {
+            this.results = data['data']['items'];
+            console.log(this.results);
+            
+          }
+        },
+        err => console.log(err),
+        () => { }
+      )
+    }
+  }
+
+  /**
+   * addToCart
+   */
+  public addToCart(id: string) {
+    console.log('ID is ' + id);
 
   }
 
