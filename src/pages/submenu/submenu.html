@@ -22,8 +22,13 @@
         <p class="submenu-Message"><strong>Add To Cart</strong></p>
         <p class="submenu-Price"><strong>${{item.price}}</strong></p>
       </button>
+
+      <!-- Delete Button neil-->
       <button ion-button color="danger" full *ngIf="isAdmin" (click)="deleteClick(item._id)"><ion-icon name="close"> Remove</ion-icon>
-</button>
+      </button>
+
+      <!-- Edit Button neil-->
+      <button ion-button color="blue" full *ngIf="isAdmin" (click)="editItemClick(item)">Edit</button>
     </ion-card-content>
   </ion-card>
 </ion-content>

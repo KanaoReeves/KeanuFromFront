@@ -12,6 +12,7 @@ import { AdminPage } from '../pages/admin/admin';
 import { CartPage } from '../pages/cart/cart';
 import { SearchPage } from '../pages/search/search';
 
+
 @Component({
   templateUrl: 'app.html'
 })

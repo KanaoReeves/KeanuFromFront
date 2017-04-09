@@ -14,6 +14,8 @@ import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 import { AdminPage } from '../pages/admin/admin';
 import { AddItemPage } from '../pages/add-item/add-item';
 import { SearchPage } from '../pages/search/search';
+import { EdititemPage } from '../pages/edititem/edititem';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { SearchPage } from '../pages/search/search';
     CartPage,
     AdminPage,
     AddItemPage,
-    SearchPage
+    SearchPage,
+    EdititemPage
+
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -46,7 +50,9 @@ import { SearchPage } from '../pages/search/search';
     CartPage,
     AdminPage,
     AddItemPage,
-    SearchPage
+    SearchPage,
+    EdititemPage
+
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })

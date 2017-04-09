@@ -4,6 +4,7 @@ import { NavController, NavParams, LoadingController, Loading } from 'ionic-angu
 import { CartService } from '../../services/cartService';
 import { Item } from '../../../models';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { EdititemPage } from '../edititem/edititem';
 
 
 @Component({
@@ -32,19 +33,30 @@ export class SubmenuPage {
 
     })
   }
+
+  // Edit Items Event
+
+  public editItemClick(item): void {
+
+    let loader: Loading = this.loadingCtrl.create({ content: 'loading item to edit' })
+
+    this.navCtrl.push(EdititemPage, { data: item }).then(() => loader.dismiss())
+
+  }
+  // Delete Button Event - neil
   public deleteClick(id: String): void {
     let link = 'https://keanubackend.herokuapp.com/admin/item/delete/' + id;
-    let loader: Loading = this.loadingCtrl.create({content: 'Deleting item'})
+    let loader: Loading = this.loadingCtrl.create({ content: 'Deleting item' })
     loader.present();
 
     this.storage.get('token').then(value => {
-       
+
       let headers = new Headers();
       headers.append('token', value)
 
       let options = new RequestOptions({ headers: headers });
-      
-      this.http.post(link, '',options)
+
+      this.http.post(link, '', options)
         .subscribe(
         data => { },
         err => {
@@ -53,8 +65,8 @@ export class SubmenuPage {
         },
         () => {
           loader.dismiss()
-          for(let i=0; i < this.menuItems.length;i++){
-            if (this.menuItems[i]['_id']===id) {
+          for (let i = 0; i < this.menuItems.length; i++) {
+            if (this.menuItems[i]['_id'] === id) {
               this.menuItems.splice(i, 1);
             }
           }

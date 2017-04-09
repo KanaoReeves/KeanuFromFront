@@ -53,11 +53,28 @@ export class CartService {
 	 * 
 	 * @memberOf CartService
 	 */
-	public deleteFromCart(itemID: string) {
-		this.storage.get(this._cartName).then((cart: Map<String, number>) => {
-			cart.delete(itemID)
-			this.storage.set(this._cartName, cart)
+	public deleteFromCart(itemID: string):Promise<boolean> {
+		return new Promise<boolean>((resolve, reject) => {
+			this.storage.get(this._cartName).then((cart: Map<String, number>) => {
+				cart.delete(itemID)
+				console.log('cart: ');
+				
+				console.log(cart.size);
+				
+				this.storage.set(this._cartName, cart).then(()=>{
+					if (cart.size ==0 ) {
+						resolve(false);
+					}
+					else{
+						resolve(true);
+					}
+
+				}).catch(()=>{
+					reject(false);
+				})
+			})
 		})
+
 	}
 
 	/**
@@ -82,13 +99,14 @@ export class CartService {
 							index++;
 
 							cartItemsData.push({
-								'item': data,
+								'item': data.data.item,
 								'quantity': quantity
 							})
 						},
 						err => console.log(err),
 						() => {
 							if (index == this.cartItems.size) {
+								cartItemsData.sort((a, b) => { return a['item']['_id'].localeCompare(b['item']['_id']) });
 								resolve(cartItemsData)
 							}
 						}
@@ -98,6 +116,67 @@ export class CartService {
 		})//Observable
 
 
+	}
+
+	/**
+	 * Increase Quantity of cart
+	 * @param cartItem object
+	 */
+	public increaseQuantity(cartItem: any): Promise<boolean> {
+		return new Promise<boolean>((resolve, reject) => {
+
+			this.storage.get(this._cartName).then(value => {
+				//if null sets a new Map
+				this.cartItems = this._nullCheck(value)
+				// if an item is already in the cart
+				// then increment the quantity	
+				let currentQuantity = 1;
+
+				if (this.cartItems.has(cartItem.item._id)) {
+					currentQuantity = this.cartItems.get(cartItem.item._id);
+					currentQuantity++;
+				}
+				// set the cart
+				this.cartItems.set(cartItem.item._id, currentQuantity)
+
+				// store the cart
+				this.storage.set(this._cartName, this.cartItems).then(() => {
+					resolve(true)
+				}).catch(() => {
+					reject(false)
+				});
+			})
+		});
+	}
+
+	/**
+	 * Decrease Quantity
+	 * @param cartItem object
+	 */
+	public decreaseQuantity(cartItem: any): Promise<boolean> {
+		return new Promise<boolean>((resolve, reject) => {
+			this.storage.get(this._cartName).then(value => {
+				//if null sets a new Map
+				this.cartItems = this._nullCheck(value)
+				// if an item is already in the cart
+				// then increment the quantity	
+				let currentQuantity = 1;
+
+				if (this.cartItems.has(cartItem.item._id)) {
+					currentQuantity = this.cartItems.get(cartItem.item._id);
+					currentQuantity--;
+				}
+				// set the cart
+				this.cartItems.set(cartItem.item._id, currentQuantity)
+
+				// store the cart
+				this.storage.set(this._cartName, this.cartItems).then(() => {
+					resolve(true);
+				}).catch(() => {
+					reject(false);
+				});
+			});
+		});
 	}
 
 	/**
@@ -114,7 +193,7 @@ export class CartService {
 		return new Promise<Array<Object>>((resolve, reject) => {
 			this.storage.get(this._cartName).then((cart: Map<String, number>) => {
 				let cartObject = new Array<Object>();
-				cart.forEach((value:number, key:string)=>{
+				cart.forEach((value: number, key: string) => {
 					cartObject.push({
 						'itemId': key,
 						'quantity': value
@@ -131,4 +210,6 @@ export class CartService {
 	private _nullCheck(value) {
 		return value == null ? new Map<String, number>() : value;
 	}
+
 }
+
