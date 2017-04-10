@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
+import { OneSignal } from '@ionic-native/onesignal';
 
 // Keanu Pages
 import { LoginPage } from '../pages/login/login';
@@ -12,8 +13,10 @@ import { AdminPage } from '../pages/admin/admin';
 import { CartPage } from '../pages/cart/cart';
 import { ProfilePage } from '../pages/profile/profile';
 
+
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [OneSignal]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -23,8 +26,12 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform,
-    public storage: Storage) {
+  constructor
+    (
+    public platform: Platform,
+    public storage: Storage,
+    public oneSignal: OneSignal
+    ) {
     this.initializeApp();
 
     // Title + Routes for the Menu
@@ -38,8 +45,8 @@ export class MyApp {
     ];
 
     // push admin page if user is an admin
-    this.storage.get('adminRights').then((isAdmin: boolean)=>{
-      if(isAdmin){this.pages.push({ title: 'Admin', component: AdminPage})}
+    this.storage.get('adminRights').then((isAdmin: boolean) => {
+      if (isAdmin) { this.pages.push({ title: 'Admin', component: AdminPage }) }
     })
 
     // if token is available show login page
@@ -50,7 +57,16 @@ export class MyApp {
       else {
         this.pages.push({ title: 'Logout', component: LoginPage });
       }
-    })
+    });
+
+    // Push notification service
+    this.oneSignal.startInit('0c73a76c-be9a-4c17-ab9e-0ad31cbaa349', '1031321310203');
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    this.oneSignal.setSubscription(true);
+    this.oneSignal.handleNotificationReceived().subscribe(() => { });
+    this.oneSignal.handleNotificationOpened().subscribe(() => { });
+    this.oneSignal.endInit();
+
 
   }
 
@@ -76,7 +92,7 @@ export class MyApp {
     }
 
     this.storage.get('token').then((value: string) => {
-      if(value != "" && value != null){
+      if (value != "" && value != null) {
         this.pages.pop();
         this.pages.push({ title: 'Logout', component: LoginPage })
       }

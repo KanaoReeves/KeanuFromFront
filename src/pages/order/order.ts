@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, RequestOptions, Headers, } from '@angular/http';
 import { Storage } from '@ionic/storage';
+import { OneSignal } from '@ionic-native/onesignal';
+
 import { HomePage } from '../home/home';
 import { CartService } from '../../services/cartService';
 import { ItemService } from '../../services/getItem';
@@ -18,6 +20,7 @@ import { ItemService } from '../../services/getItem';
 })
 
 export class OrderPage {
+  
   public deliveryTgl : boolean;
   public cartItems: Array<any>
   public cartItem: { itemId: string, quantity: Number }
@@ -25,7 +28,8 @@ export class OrderPage {
   public orderItemSent: Array<{ [key: string]: Number }>
   public orderItems: Array<{ name: String, price: any, imageURL: String, quantity: Number }>
   public totalPrice: { subTotal: number, tax: number; total: number }
-  public paymentInformation: Object
+  public paymentInformation: Object;
+  public pushUserId: string;
 
   constructor(
     public navCtrl: NavController,
@@ -35,7 +39,8 @@ export class OrderPage {
     private storage: Storage,
     private cartService: CartService,
     private itemService: ItemService,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private oneSignal: OneSignal) {
     this.cartItems = new Array<any>()
     this.orderItems = new Array<any>()
     this.totalPrice = { subTotal: 0, tax: 0, total: 0 }
@@ -94,7 +99,8 @@ export class OrderPage {
         "date": newdate,
         "delivery": this.deliveryTgl,
         "items": this.orderItemSent,
-        "price": this.totalPrice.total
+        "price": this.totalPrice.total,
+        "pushUserId": this.pushUserId
       }
 
       console.log(JSON.stringify(confirmOrder));
@@ -136,6 +142,13 @@ export class OrderPage {
 
   ionViewDidLoad() {
     console.log('In Order Page');
+
+    console.log('*** Set User Id ***');
+    this.oneSignal.getIds().then(userObj => {
+      this.pushUserId = userObj.userId;
+      console.log('userId: '+this.pushUserId);
+      
+    })
 
     this.cartService.getCartAsObject().then(itemsData => {
       this.cartItems = itemsData;
