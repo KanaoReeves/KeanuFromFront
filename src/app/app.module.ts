@@ -13,6 +13,7 @@ import { OrderPage } from '../pages/order/order'
 import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 import { AdminPage } from '../pages/admin/admin';
 import { AddItemPage } from '../pages/add-item/add-item';
+import { ProfilePage } from '../pages/profile/profile';
 import { SearchPage } from '../pages/search/search';
 import { EdititemPage } from '../pages/edititem/edititem';
 
@@ -30,9 +31,9 @@ import { EdititemPage } from '../pages/edititem/edititem';
     CartPage,
     AdminPage,
     AddItemPage,
+    ProfilePage,
     SearchPage,
     EdititemPage
-
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -50,9 +51,9 @@ import { EdititemPage } from '../pages/edititem/edititem';
     CartPage,
     AdminPage,
     AddItemPage,
+    ProfilePage,
     SearchPage,
     EdititemPage
-
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })
