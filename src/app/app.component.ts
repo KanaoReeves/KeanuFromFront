@@ -34,7 +34,7 @@ export class MyApp {
     public platform: Platform,
     public storage: Storage,
     public oneSignal: OneSignal
-    ) {
+  ) {
     this.initializeApp();
 
     // Title + Routes for the Menu
@@ -72,12 +72,15 @@ export class MyApp {
       StatusBar.backgroundColorByHexString('#165cd3');
       Splashscreen.hide();
       // Push notification service
-    this.oneSignal.startInit('0c73a76c-be9a-4c17-ab9e-0ad31cbaa349', '1031321310203');
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-    this.oneSignal.setSubscription(true);
-    this.oneSignal.handleNotificationReceived().subscribe(() => { });
-    this.oneSignal.handleNotificationOpened().subscribe(() => { });
-    this.oneSignal.endInit();
+      setTimeout(function () {
+        this.oneSignal.startInit('0c73a76c-be9a-4c17-ab9e-0ad31cbaa349', '1031321310203');
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+        this.oneSignal.setSubscription(true);
+        this.oneSignal.handleNotificationReceived().subscribe(() => { });
+        this.oneSignal.handleNotificationOpened().subscribe(() => { });
+        this.oneSignal.endInit();
+      }, 2000);
+
     });
   }
 
