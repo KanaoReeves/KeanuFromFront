@@ -62,16 +62,6 @@ export class MyApp {
         this.pages.push({ title: 'Logout', component: LoginPage });
       }
     });
-
-    // Push notification service
-    this.oneSignal.startInit('0c73a76c-be9a-4c17-ab9e-0ad31cbaa349', '1031321310203');
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-    this.oneSignal.setSubscription(true);
-    this.oneSignal.handleNotificationReceived().subscribe(() => { });
-    this.oneSignal.handleNotificationOpened().subscribe(() => { });
-    this.oneSignal.endInit();
-
-
   }
 
   initializeApp() {
@@ -81,6 +71,13 @@ export class MyApp {
       StatusBar.styleDefault();
       StatusBar.backgroundColorByHexString('#165cd3');
       Splashscreen.hide();
+      // Push notification service
+    this.oneSignal.startInit('0c73a76c-be9a-4c17-ab9e-0ad31cbaa349', '1031321310203');
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    this.oneSignal.setSubscription(true);
+    this.oneSignal.handleNotificationReceived().subscribe(() => { });
+    this.oneSignal.handleNotificationOpened().subscribe(() => { });
+    this.oneSignal.endInit();
     });
   }
 
