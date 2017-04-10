@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { CartService } from '../../services/cartService';
-import { Item } from '../../../models';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { EdititemPage } from '../edititem/edititem';
 
@@ -29,8 +28,6 @@ export class SubmenuPage {
     this.menuItems = this.navParams.get('data');
     this.storage.get('adminRights').then(value => {
       this.isAdmin = value
-
-
     })
   }
 

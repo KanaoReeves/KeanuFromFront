@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, RequestOptions, Headers, } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { HomePage } from '../home/home';
-import { CartService } from '../../services/cartService';
-import { ItemService } from '../../services/getItem';
 /*
   Generated class for the Profile page.
 

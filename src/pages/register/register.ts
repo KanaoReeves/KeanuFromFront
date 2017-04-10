@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
 import { PaymentInfoPage } from '../paymentInfo/paymentInfo';
 
