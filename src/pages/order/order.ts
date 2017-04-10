@@ -108,7 +108,7 @@ export class OrderPage {
 
       let body = confirmOrder;
 
-      this.http.post('https://keanubackend.her  okuapp.com/order/add', body, options).map(res => res.json()).subscribe(
+      this.http.post('https://keanubackend.herokuapp.com/order/add', body, options).map(res => res.json()).subscribe(
         data => {
           console.log(data);
         }, err => {
