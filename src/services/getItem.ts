@@ -17,7 +17,7 @@ export class ItemService {
             let index: number = 0;
             cartItem.forEach(element => {
 
-                let menu = this.http.get(`https://keanubackend.herokuapp.com/item/id/${element.itemId}`).
+                this.http.get(`https://keanubackend.herokuapp.com/item/id/${element.itemId}`).
                     map(res => res.json()).subscribe(
                     data => {
                         index++;

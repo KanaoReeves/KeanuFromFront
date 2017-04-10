@@ -62,7 +62,7 @@ export class PaymentInfoPage {
       () => {
         console.log('posted registration done')
         this.alertCtrl.create({
-          title: 'registration Successful',
+          title: 'Registration Successful',
           subTitle: 'Congratulations, redirecting to the login page',
           buttons: ['OK']
         }).present();
