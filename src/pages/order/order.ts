@@ -64,10 +64,18 @@ export class OrderPage {
   public ConfirmOrder() {
     // Service GetDate
     let dateObj = new Date();
-    let month = dateObj.getUTCMonth() + 1; //months from 1-12
-    let day = dateObj.getUTCDate();
+    let month = (dateObj.getUTCMonth() + 1).toString(); //months from 1-12
+    // If month/day doesn't have two digits
+    if (month != "10" || "11" || "12" ){
+      month = "0" + month;
+    }
+    let day = (dateObj.getUTCDate()).toString();
+    if (day == "1" || "2" || "3" || "4" || "5" || "6" || "7" || "8" || "9"){
+      day = "0" + day;
+    }
     let year = dateObj.getUTCFullYear();
     let newdate = day + ":" + month + ":" + year
+
 
     this.alertCtrl.create({
       title: 'Order Confirmation',
@@ -100,7 +108,7 @@ export class OrderPage {
 
       let body = confirmOrder;
 
-      this.http.post('https://keanubackend.herokuapp.com/order/add', body, options).map(res => res.json()).subscribe(
+      this.http.post('https://keanubackend.her  okuapp.com/order/add', body, options).map(res => res.json()).subscribe(
         data => {
           console.log(data);
         }, err => {
