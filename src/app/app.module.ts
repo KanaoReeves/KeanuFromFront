@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
+
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { RegisterPage } from '../pages/register/register';
@@ -12,7 +13,9 @@ import { OrderPage } from '../pages/order/order'
 import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 import { AdminPage } from '../pages/admin/admin';
 import { AddItemPage } from '../pages/add-item/add-item';
+import { SearchPage } from '../pages/search/search';
 import { EdititemPage } from '../pages/edititem/edititem';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { EdititemPage } from '../pages/edititem/edititem';
     CartPage,
     AdminPage,
     AddItemPage,
+    SearchPage,
     EdititemPage
+
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -45,6 +50,7 @@ import { EdititemPage } from '../pages/edititem/edititem';
     CartPage,
     AdminPage,
     AddItemPage,
+    SearchPage,
     EdititemPage
 
   ],
