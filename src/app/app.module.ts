@@ -1,6 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import {OneSignal} from '@ionic-native/onesignal';
+// import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage'
 import { MyApp } from './app.component';
 
 import { LoginPage } from '../pages/login/login';
@@ -36,7 +38,8 @@ import { EdititemPage } from '../pages/edititem/edititem';
     EdititemPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -55,6 +58,6 @@ import { EdititemPage } from '../pages/edititem/edititem';
     SearchPage,
     EdititemPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, OneSignal]
 })
 export class AppModule {}
