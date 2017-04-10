@@ -9,7 +9,7 @@ export class MenuCallService {
 
     public getMenu(category) {
         return new Promise<Object>((resolve, reject) => {
-            let menu = this.http.get(`https://keanubackend.herokuapp.com/item/category/${category}`).map(res => res.json()).subscribe(
+            this.http.get(`https://keanubackend.herokuapp.com/item/category/${category}`).map(res => res.json()).subscribe(
                 data => {
                     this.menuItems = data.data.items
                 },
