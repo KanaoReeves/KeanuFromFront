@@ -35,9 +35,8 @@ export class MyApp {
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
-
       { title: 'Restaurant Info', component: RestaurantinfoPage },
-
+      { title: 'Cart', component: CartPage },
       { title: 'Search', component: SearchPage }
 
     ];
