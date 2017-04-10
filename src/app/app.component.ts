@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
+import { OneSignal } from '@ionic-native/onesignal';
 
 // Keanu Pages
 import { LoginPage } from '../pages/login/login';
@@ -14,7 +15,8 @@ import { SearchPage } from '../pages/search/search';
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [OneSignal]
 })
 export class MyApp {
 
@@ -25,11 +27,13 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
+
   constructor(
     public events: Events,
     public platform: Platform,
-    public storage: Storage
-  ) {
+    public storage: Storage,
+    public oneSignal: OneSignal
+    ) {
     this.initializeApp();
 
     // Title + Routes for the Menu
@@ -54,7 +58,16 @@ export class MyApp {
       else {
         this.pages.push({ title: 'Logout', component: LoginPage });
       }
-    })
+    });
+
+    // Push notification service
+    this.oneSignal.startInit('0c73a76c-be9a-4c17-ab9e-0ad31cbaa349', '1031321310203');
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    this.oneSignal.setSubscription(true);
+    this.oneSignal.handleNotificationReceived().subscribe(() => { });
+    this.oneSignal.handleNotificationOpened().subscribe(() => { });
+    this.oneSignal.endInit();
+
 
   }
 
