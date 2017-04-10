@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { OneSignal } from '@ionic-native/onesignal';
@@ -12,6 +12,7 @@ import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
 import { AdminPage } from '../pages/admin/admin';
 import { CartPage } from '../pages/cart/cart';
 import { ProfilePage } from '../pages/profile/profile';
+import { SearchPage } from '../pages/search/search';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { ProfilePage } from '../pages/profile/profile';
   providers: [OneSignal]
 })
 export class MyApp {
+
   @ViewChild(Nav) nav: Nav;
 
   // Setting the root page to HomePage
@@ -26,8 +28,9 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor
-    (
+
+  constructor(
+    public events: Events,
     public platform: Platform,
     public storage: Storage,
     public oneSignal: OneSignal
@@ -40,8 +43,9 @@ export class MyApp {
       { title: 'Profile', component: ProfilePage },
       //Restaurant infomation page
       { title: 'Restaurant Info', component: RestaurantinfoPage },
-      // If Token exists, show logout
       { title: 'Cart', component: CartPage },
+      { title: 'Search', component: SearchPage }
+
     ];
 
     // push admin page if user is an admin
