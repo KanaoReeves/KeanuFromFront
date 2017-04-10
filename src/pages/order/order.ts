@@ -41,11 +41,12 @@ export class OrderPage {
     private itemService: ItemService,
     private alertCtrl: AlertController,
     private oneSignal: OneSignal) {
-    this.cartItems = new Array<any>()
-    this.orderItems = new Array<any>()
-    this.totalPrice = { subTotal: 0, tax: 0, total: 0 }
-    this.orderItemSent = new Array<{ "": 0 }>()
-    this.paymentInformation = new Object
+      this.pushUserId = ""
+      this.cartItems = new Array<any>()
+      this.orderItems = new Array<any>()
+      this.totalPrice = { subTotal: 0, tax: 0, total: 0 }
+      this.orderItemSent = new Array<{ "": 0 }>()
+      this.paymentInformation = new Object
   }
 
   public GetPaymentInfo(): void {
