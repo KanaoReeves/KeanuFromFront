@@ -60,8 +60,8 @@ export class LoginPage {
               console.log('posted login done')
               loader.dismiss();
               this.alertCtrl.create({
-                title: 'login Successful',
-                subTitle: 'login is valid, redirecting to homepage',
+                title: 'Login Confirmation',
+                subTitle: 'Login Successful. Redirecting to homepage!',
                 buttons: ['OK']
               }).present();
               this.navCtrl.setRoot(HomePage);
