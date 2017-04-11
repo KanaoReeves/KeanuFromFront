@@ -54,6 +54,7 @@ export class MyApp {
     // if token is available show login page
     this.storage.get('token').then((value: string) => {
       if (value == null || value == "") {
+        this.index = 1;
         this.pages.push({ title: 'Login', component: LoginPage });
       }
       else {
