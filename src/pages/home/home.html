@@ -15,25 +15,25 @@
   <ion-card (click)="launchSubMenuPage('Starter')">
     <img src="assets/images/menu-starter.jpg"/>
     <div class="card-title">Starters</div>
-    <div class="card-subtitle">5 Items</div>
+    <div class="card-subtitle">{{itemsInSubmenu.Starter}} Items</div>
   </ion-card>
 
   <ion-card (click)="launchSubMenuPage('Salads')">
     <img src="assets/images/menu-salad.jpg"/>
     <div class="card-title">Salads</div>
-    <div class="card-subtitle">3 Items</div>
+    <div class="card-subtitle">{{itemsInSubmenu.Salad}} Items</div>
   </ion-card>
 
   <ion-card (click)="launchSubMenuPage('Entrees')">
     <img src="assets/images/menu-entrees.jpg"/>
     <div class="card-title">Entrees</div>
-    <div class="card-subtitle">6 Items</div>
+    <div class="card-subtitle">{{itemsInSubmenu.Entree}} Items</div>
   </ion-card>
 
   <ion-card (click)="launchSubMenuPage('Dessert')">
     <img src="assets/images/menu-dessert.jpg"/>
     <div class="card-title">Desserts</div>
-    <div class="card-subtitle">4 Items</div>
+    <div class="card-subtitle">{{itemsInSubmenu.Dessert}} Items</div>
   </ion-card>
 
 </ion-content>

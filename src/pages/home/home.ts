@@ -14,6 +14,7 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
   public menuItems;
   public SubMenuPage = SubmenuPage;
+  public itemsInSubmenu: Object
 
   constructor(
     public navCtrl: NavController,
@@ -23,18 +24,45 @@ export class HomePage {
     private storage: Storage,
     private loadingCtrl: LoadingController
   ) {
-    let loading: Loading = this.loadingCtrl.create({})
-    loading.present()
+    let loading: Loading = this.loadingCtrl.create({});
+    loading.present();
 
-    this.http.get('https://keanubackend.herokuapp.com')
-      .subscribe(() => { }, () => { }, () => loading.dismiss())
+    this.itemsInSubmenu = {
+      'Starter': 0,
+      'Salad': 0,
+      'Entree': 0,
+      'Dessert': 0
+    };
+
+    this.http.get(`https://keanubackend.herokuapp.com/item/category/Starter/count`).map(res => res.json()).subscribe(
+      data => {
+        this.itemsInSubmenu['Starter'] = data.data.count;
+        console.log(data.data.count);
+      });
+    this.http.get(`https://keanubackend.herokuapp.com/item/category/Salads/count`).map(res => res.json()).subscribe(
+      data => {
+        this.itemsInSubmenu['Salad'] = data.data.count;
+        console.log(data.data.count);
+      });
+    this.http.get(`https://keanubackend.herokuapp.com/item/category/Entrees/count`).map(res => res.json()).subscribe(
+      data => {
+        this.itemsInSubmenu['Entree'] = data.data.count;
+        console.log(data.data.count);
+      });
+    this.http.get(`https://keanubackend.herokuapp.com/item/category/Dessert/count`).map(res => res.json()).subscribe(
+      data => {
+        this.itemsInSubmenu['Dessert'] = data.data.count;
+        console.log(data.data.count);
+      });
+
+    this.http.get('https://keanubackend.herokuapp.com').subscribe(() => { }, () => { }, () => loading.dismiss());
   }
 
   public launchSubMenuPage(type: string): void {
     let loading: Loading = this.loadingCtrl.create({})
     loading.present();
 
-    this.menuCall.getMenu(type).then((menuItems) => {
+    this.menuCall.getMenu(type).then((menuItems: Array<any>) => {
       console.log('###### From HOME START ######')
       console.log(menuItems)
       console.log('###### From HOME END ######')
