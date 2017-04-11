@@ -47,6 +47,7 @@ export class OrderPage {
       this.totalPrice = { subTotal: 0, tax: 0, total: 0 }
       this.orderItemSent = new Array<{ "": 0 }>()
       this.paymentInformation = new Object
+      this.deliveryTgl = false;
   }
 
   public GetPaymentInfo(): void {
@@ -76,7 +77,7 @@ export class OrderPage {
       month = "0" + month;
     }
     let day = (dateObj.getUTCDate()).toString();
-    if (day == "1" || "2" || "3" || "4" || "5" || "6" || "7" || "8" || "9"){
+    if (day == "1" || day == "2" || day == "3" || day == "4" || day == "5" || day == "6" || day == "7" || day == "8" || day == "9"){
       day = "0" + day;
     }
     let year = dateObj.getUTCFullYear();
@@ -122,6 +123,7 @@ export class OrderPage {
           console.log(err);
         },
         () => {
+          this.storage.remove('cartItem');
           this.navCtrl.setRoot(HomePage);
         }
       )
