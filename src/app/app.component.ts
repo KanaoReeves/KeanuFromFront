@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, Events } from 'ionic-angular';
+import { Nav, Platform, Events, AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { OneSignal } from '@ionic-native/onesignal';
@@ -31,7 +31,8 @@ export class MyApp {
     public events: Events,
     public platform: Platform,
     public storage: Storage,
-    public oneSignal: OneSignal
+    public oneSignal: OneSignal,
+    private alertCtrl: AlertController
   ) {
     this.initializeApp();
 
@@ -70,7 +71,7 @@ export class MyApp {
       StatusBar.backgroundColorByHexString('#165cd3');
       Splashscreen.hide();
 
-      if(this.oneSignal){
+      if (this.oneSignal) {
         this.oneSignal.startInit('0c73a76c-be9a-4c17-ab9e-0ad31cbaa349', '1031321310203');
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
         this.oneSignal.setSubscription(true);
@@ -82,14 +83,17 @@ export class MyApp {
     });
   }
 
-
   openPage(page) {
     if (page.title == "Logout") {
-      alert("You have successfully logged out")
       this.storage.remove('token');
       this.storage.remove('cartItem');
       this.pages.pop();
       this.pages.push({ title: 'Login', component: LoginPage })
+      this.alertCtrl.create({
+        title: 'Logout Confirmation',
+        subTitle: 'You have Successfully logged out',
+        buttons: ['Okay']
+      }).present();
       this.nav.setRoot(HomePage);
     }
 

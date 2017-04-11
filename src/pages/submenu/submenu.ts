@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading, AlertController } from 'ionic-angular';
 import { CartService } from '../../services/cartService';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { EdititemPage } from '../edititem/edititem';
@@ -22,6 +22,7 @@ export class SubmenuPage {
     private storage: Storage,
     private cartService: CartService,
     private http: Http,
+    private alertCtrl: AlertController,
     private loadingCtrl: LoadingController
   ) {
 
@@ -87,7 +88,13 @@ export class SubmenuPage {
   public addItem(itemId: String): void {
     console.log('itemID is : ' + itemId);
 
-    this.cartService.addToCart({ 'id': itemId, 'quantity': 1 })
+    this.cartService.addToCart({ 'id': itemId, 'quantity': 1 });
+
+    this.alertCtrl.create({
+      title: 'Cart Confirmation',
+      subTitle: 'This item has been added to the cart',
+      buttons: ['Okay']
+    }).present();
   }
 
 }
