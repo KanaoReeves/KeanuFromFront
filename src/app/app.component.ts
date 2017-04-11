@@ -39,9 +39,8 @@ export class MyApp {
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
-      { title: 'Profile', component: ProfilePage },
       //Restaurant infomation page
-      { title: 'Restaurant Info', component: RestaurantinfoPage },
+      { title: 'About Us', component: RestaurantinfoPage },
       { title: 'Cart', component: CartPage },
       { title: 'Search', component: SearchPage }
 
@@ -58,6 +57,7 @@ export class MyApp {
         this.pages.push({ title: 'Login', component: LoginPage });
       }
       else {
+        this.pages.push({title: 'Profile', component: ProfilePage });
         this.pages.push({ title: 'Logout', component: LoginPage });
       }
     });
@@ -88,6 +88,7 @@ export class MyApp {
       this.storage.remove('token');
       this.storage.remove('cartItem');
       this.pages.pop();
+      this.pages.pop();
       this.pages.push({ title: 'Login', component: LoginPage })
       this.alertCtrl.create({
         title: 'Logout Confirmation',
@@ -100,6 +101,7 @@ export class MyApp {
     this.storage.get('token').then((value: string) => {
       if (value != "" && value != null) {
         this.pages.pop();
+        this.pages.push({title: 'Profile', component: ProfilePage })
         this.pages.push({ title: 'Logout', component: LoginPage })
       }
       this.nav.setRoot(page.component)
