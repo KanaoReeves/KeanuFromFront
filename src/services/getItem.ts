@@ -11,9 +11,8 @@ export class ItemService {
         this.orderItems = new Array<any>()
     }
 
-    public  GetItem(cartItem) {
+    public GetItem(cartItem) {
         return new Promise<Array<any>>((resolve, reject) => {
-            cartItem
             let index: number = 0;
             cartItem.forEach(element => {
 
