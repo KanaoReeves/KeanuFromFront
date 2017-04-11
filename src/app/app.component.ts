@@ -20,7 +20,7 @@ import { SearchPage } from '../pages/search/search';
 export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
-
+  public index : any;
   // Setting the root page to HomePage
   rootPage: any = HomePage;
 
@@ -35,7 +35,7 @@ export class MyApp {
     private alertCtrl: AlertController
   ) {
     this.initializeApp();
-
+    this.index = 0;
     // Title + Routes for the Menu
     this.pages = [
       { title: 'Home', component: HomePage }, // Added Home as the first menu option 
@@ -57,7 +57,7 @@ export class MyApp {
         this.pages.push({ title: 'Login', component: LoginPage });
       }
       else {
-        this.pages.push({title: 'Profile', component: ProfilePage });
+        this.pages.push({ title: 'Profile', component: ProfilePage });
         this.pages.push({ title: 'Logout', component: LoginPage });
       }
     });
@@ -85,6 +85,7 @@ export class MyApp {
 
   openPage(page) {
     if (page.title == "Logout") {
+      this.index = 1;
       this.storage.remove('token');
       this.storage.remove('cartItem');
       this.pages.pop();
@@ -98,12 +99,20 @@ export class MyApp {
       this.nav.setRoot(HomePage);
     }
 
+    
+
     this.storage.get('token').then((value: string) => {
       if (value != "" && value != null) {
         this.pages.pop();
-        this.pages.push({title: 'Profile', component: ProfilePage })
+        this.pages.pop();
+        if(this.index == 1){
+          this.pages.push({title:'Search',component:SearchPage})
+          this.index = 0;
+        }
+        this.pages.push({ title: 'Profile', component: ProfilePage })
         this.pages.push({ title: 'Logout', component: LoginPage })
       }
+
       this.nav.setRoot(page.component)
     });
   }
