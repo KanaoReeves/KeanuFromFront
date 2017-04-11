@@ -24,11 +24,15 @@ export class HomePage {
     private storage: Storage,
     private loadingCtrl: LoadingController
   ) {
-    let loading: Loading = this.loadingCtrl.create({})
-    loading.present()
+    let loading: Loading = this.loadingCtrl.create({});
+    loading.present();
 
-    this.http.get('https://keanubackend.herokuapp.com')
-      .subscribe(() => { }, () => { }, () => loading.dismiss())
+    this.itemsInSubmenu = {
+      'Starter': 0,
+      'Salad': 0,
+      'Entree': 0,
+      'Dessert': 0
+    };
 
     this.http.get(`https://keanubackend.herokuapp.com/item/category/Starter/count`).map(res => res.json()).subscribe(
       data => {
@@ -50,6 +54,8 @@ export class HomePage {
         this.itemsInSubmenu['Dessert'] = data.data.count;
         console.log(data.data.count);
       });
+
+    this.http.get('https://keanubackend.herokuapp.com').subscribe(() => { }, () => { }, () => loading.dismiss());
   }
 
   public launchSubMenuPage(type: string): void {
