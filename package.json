@@ -33,6 +33,7 @@
     "@ionic/app-scripts": "1.2.2",
     "@ionic/cli-plugin-cordova": "0.0.8",
     "@ionic/cli-plugin-core": "0.0.7",
+    "ionic": "3.9.2",
     "typescript": "2.0.9"
   },
   "cordovaPlugins": [
